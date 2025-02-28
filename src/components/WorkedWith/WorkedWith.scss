@@ -1,0 +1,295 @@
+@use "../../styles/utils/breakepoints" as bp;
+@use "../../styles/utils/functions" as u;
+@use "../../styles/variables" as vars;
+
+// WorkedWith.scss
+
+// Breakpoint variables
+$bp-small: 480px;
+$bp-medium: 768px;
+$bp-large: 1024px;
+$bp-xl: 1200px;
+
+// Mixins for media queries
+@mixin small-screen {
+  @media (max-width: #{$bp-small}) {
+    @content;
+  }
+}
+
+@mixin medium-screen {
+  @media (max-width: #{$bp-medium}) {
+    @content;
+  }
+}
+
+@mixin large-screen {
+  @media (max-width: #{$bp-large}) {
+    @content;
+  }
+}
+
+@mixin xl-screen {
+  @media (max-width: #{$bp-xl}) {
+    @content;
+  }
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  visibility: visible;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;   
+
+  &.mobile {
+    .menu {
+      margin: 2em 0;
+    }
+
+    .preview {
+      // Fixed position for mobile view
+      position: fixed;
+      top: 50px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      width: 180px;
+      height: 220px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+
+      // Only show preview when item is active
+      &.visible {
+        opacity: 1;
+      }
+    }
+
+    .menu-item {
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+
+      &.active {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}
+
+.menu {
+  width: 100%;
+  margin: 0 0 17.5em;
+  position: relative;
+  z-index: 1;
+
+
+}
+
+.menu-item {
+  width: 100%;
+  padding: 0 2em;
+  display: flex;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  @include medium-screen {
+    padding: 0 1em;
+    flex-wrap: wrap;
+  }
+
+  @include small-screen {
+    padding: 0 0.5em;
+  }
+}
+
+.menu-item p {
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  font-family: "PP Neue Montreal", sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 100%;
+  letter-spacing: -0.025em;
+  transition: color 0.25s;
+
+  @include bp.breakpoint(large) {
+    font-size: 3rem;
+  }
+}
+
+.menu-item .name p {
+  font-family: "Bodoni Moda", serif;
+}
+
+.info,
+.tag,
+.name {
+  position: relative;
+  overflow: hidden;
+}
+
+.info,
+.tag {
+  flex: 1;
+  height: 14px;
+  font-size: 14px;
+
+  @include bp.breakpoint(large) {
+    height: 24px;
+  }
+
+  @include medium-screen {
+    flex: 100%;
+    margin-bottom: 0.5em;
+    height: 20px;
+  }
+}
+
+.info p,
+.tag p {
+  @include bp.breakpoint(large) {
+    font-size: 1.5rem;
+  }
+}
+
+.tag {
+  text-align: right;
+
+  @include medium-screen {
+    text-align: left;
+  }
+}
+
+.name {
+  flex: 4;
+  height: 55px;
+  font-size: 60px;
+  text-align: center;
+
+  @include xl-screen {
+    font-size: 48px;
+    height: 45px;
+  }
+
+  @include large-screen {
+    font-size: 36px;
+    height: 35px;
+  }
+
+  @include medium-screen {
+    flex: 100%;
+    text-align: left;
+    font-size: 28px;
+    height: 28px;
+    order: -1;
+    margin-bottom: 0.5em;
+  }
+
+  @include small-screen {
+    font-size: 24px;
+    height: 24px;
+  }
+}
+
+.info p:nth-child(2),
+.name p:nth-child(2),
+.tag p:nth-child(2) {
+  top: 100%;
+  color: vars.$off-light;
+}
+
+.menu:hover .info p:nth-child(1),
+.menu:hover .name p:nth-child(1),
+.menu:hover .tag p:nth-child(1) {
+  color: rgb(165, 165, 165);
+}
+
+.preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 225px;
+  height: 275px;
+  z-index: 999;
+  pointer-events: none;
+  will-change: transform;
+
+  @include xl-screen {
+    width: 200px;
+    height: 245px;
+  }
+
+  @include large-screen {
+    width: 180px;
+    height: 220px;
+  }
+
+  @include small-screen {
+    width: 150px;
+    height: 184px;
+  }
+}
+
+.preview-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.preview-img-2 {
+  top: 20px;
+  left: 20px;
+
+  @include medium-screen {
+    top: 15px;
+    left: 15px;
+  }
+
+  @include small-screen {
+    top: 10px;
+    left: 10px;
+  }
+}
+
+.preview-img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1 !important;
+  visibility: visible !important;
+  max-width: none;
+  display: block;
+}
+
+// Special touch interaction styles for mobile
+@media (hover: none) {
+  .menu-item {
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  .menu:hover .info p:nth-child(1),
+  .menu:hover .name p:nth-child(1),
+  .menu:hover .tag p:nth-child(1) {
+    color: inherit; // Don't apply hover effect globally on touch devices
+  }
+
+  // Apply color change only to active item
+  .menu-item.active {
+    .info p:nth-child(1),
+    .name p:nth-child(1),
+    .tag p:nth-child(1) {
+      color: rgb(165, 165, 165);
+    }
+  }
+}

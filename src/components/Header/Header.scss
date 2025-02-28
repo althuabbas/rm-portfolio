@@ -1,0 +1,84 @@
+@use "../../styles/utils/breakepoints" as bp;
+@use "../../styles/utils/functions" as u;
+@use "../../styles/variables" as vars;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-block: 10px;
+  z-index: 100000;
+  transition: transform 0.3s ease-in-out;
+  background-color: vars.$primary_dark;
+
+  &__hidden {
+    transform: translateY(-100%);
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    all: unset;
+    color: vars.$light;
+    font-size: u.rem(22);
+    font-family: "Bricolage Grotesque";
+    font-weight: 700;
+
+    @include bp.breakpoint(large) {
+      font-size: u.rem(28);
+    }
+  }
+
+  &__menu {
+    color: vars.$light;
+    cursor: pointer;
+  }
+
+  &__link {
+  }
+
+  &__mob_menu {
+  }
+
+  ul {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    z-index: -1;
+
+    // background: rgba(196, 212, 255, 0.65);
+    background: rgba(230, 230, 230, 0.65);
+    backdrop-filter: blur(18.5px);
+    -webkit-backdrop-filter: blur(18.5px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    // for animation
+    opacity: 0;
+    height: 0;
+
+    li {
+      margin: 1rem 0;
+      font-size: clamp(
+        u.rem(28),
+        1.3995098039215685rem + 1.4379084967320261vw,
+        u.rem(50)
+      );
+
+      a {
+        all: unset;
+        color: vars.$primary_dark;
+        font-family: "Bodoni Moda", serif;
+      }
+    }
+  }
+}

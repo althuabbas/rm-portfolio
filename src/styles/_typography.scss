@@ -1,0 +1,41 @@
+@use "./utils/functions" as u;
+
+h1 {
+  font-size: clamp(
+    u.rem(30),
+    1.0344827586206895rem + 3.4482758620689653vw,
+    u.rem(70)
+  );
+}
+
+h2 {
+  font-size: clamp(
+    u.rem(25),
+    1.037176724137931rem + 2.1551724137931036vw,
+    u.rem(50)
+  );
+}
+
+h3 {
+  font-size: clamp(
+    u.rem(22),
+    0.9967672413793103rem + 1.5517241379310345vw,
+    u.rem(40)
+  );
+}
+
+h4 {
+  font-size: clamp(
+    u.rem(12),
+    0.6239224137931034rem + 0.5172413793103449vw,
+    u.rem(18)
+  );
+}
+
+p {
+  font-size: clamp(
+    u.rem(10),
+    0.665948275862069rem + 0.3448275862068966vw,
+    u.rem(14)
+  );
+}

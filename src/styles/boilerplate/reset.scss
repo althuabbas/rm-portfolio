@@ -1,0 +1,128 @@
+@use "../variables" as vars;
+@use "../utils/breakepoints" as bp;
+@use "../utils/functions" as u;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  // height: 300vh;
+  color: vars.$light;
+  margin: 0;
+  font-family: "Cambo", Arial, Helvetica, sans-serif;
+  font-size: clamp(
+    u.rem(12),
+    0.665948275862069rem + 0.3448275862068966vw,
+    u.rem(16)
+  );
+  line-height: 1.7;
+  overflow-x: hidden;
+  background-color: vars.$primary-dark;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+
+.wrapper {
+  width: min(100% - u.rem(40), u.rem(1780));
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.ph {
+  font-size: u.rem(24);
+  color: vars.$light;
+
+  @include bp.breakpoint(large) {
+    font-size: u.rem(28);
+  }
+}
+
+section {
+  margin-top: 60px;
+  @include bp.breakpoint(large) {
+    margin-top: 100px;
+  }
+}
+
+.header_text {
+  font-family: "Bodoni Moda", serif;
+}
+
+
+
+// .marquee {
+//   position: relative;
+//   background: #0f0f0f;
+//   color: #eee;
+//   padding: 32px 0;
+//   font-weight: 600;
+//   font-size: 40px;
+//   text-transform: uppercase;
+//   overflow: hidden;
+// }
+
+// .marquee__inner {
+//   display: flex;
+//   width: fit-content;
+//   flex: auto;
+//   flex-direction: row;
+// }
+
+// .marquee__part {
+//   display: flex;
+//   align-items: center;
+//   flex-shrink: 0;
+//   padding: 0 4px;
+// }
+
+// .arrow {
+//   width: 60px;
+//   height: 80px;
+//   margin: 0 1em;
+//   transform: rotate(90deg);
+//   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+// }
+
+// .arrow.active {
+//   transform: rotate(-90deg);
+//   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+// }

@@ -1,0 +1,46 @@
+// src/components/CustomCursor/CustomCursor.scss
+@use "../../styles/utils/breakepoints" as bp;
+@use "../../styles/utils/functions" as u;
+@use "../../styles/variables" as vars;
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+
+  .cursor-text {
+    font-size: 12px;
+    font-weight: 600;
+    font-family: "Bricolage Grotesque", serif;
+    text-transform: uppercase;
+    color: vars.$primary-dark;
+    letter-spacing: 1px;
+    opacity: 0;
+  }
+}
+
+// Apply this class to any container where you want to use the custom cursor
+.custom-cursor-container {
+  img,
+  button,
+  a,
+  .hoverable {
+    cursor: none;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
