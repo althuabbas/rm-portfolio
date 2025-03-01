@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import "./WorkedWith.scss";
+import { useNavigate } from "react-router-dom";
 
 // preview image
 import rmXfp from "../../assets/images/RmXFPmodelagency/09.jpeg";
@@ -13,6 +14,8 @@ import romaizan from "../../assets/images/al-romaizan/1.jpeg";
 import taali from "../../assets/images/taali/1.jpeg";
 
 const WorkedWith = () => {
+  const navigate = useNavigate();
+
   const [activeIndex, setActiveIndex] = useState(null);
   const previewRef = useRef(null);
   const preview1Ref = useRef(null);
@@ -296,10 +299,15 @@ const WorkedWith = () => {
             onMouseOver={(e) => handleMouseOver(index, e)}
             onMouseOut={handleMouseOut}
             onTouchStart={(e) => handleTouchStart(index, e)}
+            // onClick={() =>
+            //   (window.location.href = `/rm-portfolio#/client/${item.name
+            //     .toLowerCase()
+            //     .replace(/\s+/g, "-")}`)
+            // }
             onClick={() =>
-              (window.location.href = `/rm-portfolio/client/${item.name
-                .toLowerCase()
-                .replace(/\s+/g, "-")}`)
+              navigate(
+                `/client/${item.name.toLowerCase().replace(/\s+/g, "-")}`
+              )
             }
           >
             <div className="info">
