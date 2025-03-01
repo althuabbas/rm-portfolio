@@ -2,6 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import "./WorkedWith.scss";
 
+// preview image
+import rmXfp from "../../assets/images/RmXFPmodelagency/09.jpeg";
+import sweet from "../../assets/images/sweetLady/01.jpeg";
+import soFear from "../../assets/images/so-fear-clock/m-1.jpg";
+import bridel from "../../assets/images/bridel/1.jpeg";
+import inFrame from "../../assets/images/inframe-dubai/1.jpeg";
+import bij from "../../assets/images/bijouq-italy/1.jpeg";
+import romaizan from "../../assets/images/al-romaizan/1.jpeg";
+import taali from "../../assets/images/taali/1.jpeg";
+
 const WorkedWith = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const previewRef = useRef(null);
@@ -12,14 +22,14 @@ const WorkedWith = () => {
 
   // Image sources
   const imageSources = [
-    "/src/assets/images/RmXFPmodelagency/09.jpeg",
-    "/src/assets/images/sweetLady/01.jpeg",
-    "/src/assets/images/so-fear-clock/m-1.jpg",
-    "/src/assets/images/bridel/1.jpeg",
-    "/src/assets/images/inframe-dubai/1.jpeg",
-    "/src/assets/images/bijouq-italy/1.jpeg",
-    "/src/assets/images/al-romaizan/1.jpeg",
-    "/src/assets/images/taali/1.jpeg",
+    rmXfp,
+    sweet,
+    soFear,
+    bridel,
+    inFrame,
+    bij,
+    romaizan,
+    taali,
   ];
 
   const menuItems = [
@@ -275,7 +285,7 @@ const WorkedWith = () => {
         <div className="preview-img preview-img-1" ref={preview1Ref}></div>
         <div className="preview-img preview-img-2" ref={preview2Ref}></div>
       </div>
-      
+
       <div className="menu" ref={menuRef} onMouseOut={handleMenuMouseOut}>
         {menuItems.map((item, index) => (
           <div
@@ -286,7 +296,11 @@ const WorkedWith = () => {
             onMouseOver={(e) => handleMouseOver(index, e)}
             onMouseOut={handleMouseOut}
             onTouchStart={(e) => handleTouchStart(index, e)}
-            onClick={() => window.location.href = `/client/${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+            onClick={() =>
+              (window.location.href = `/rm-portfolio/client/${item.name
+                .toLowerCase()
+                .replace(/\s+/g, "-")}`)
+            }
           >
             <div className="info">
               <p>{item.info}</p>

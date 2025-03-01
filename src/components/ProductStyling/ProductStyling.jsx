@@ -1,5 +1,8 @@
 import "./ProductStyling.scss";
 
+import ps1 from '../../assets/images/mesarati/mesarati-1.jpg'
+import ps2 from '../../assets/images/mesarati/mesarati-2.jpg'
+
 const ProductStyling = () => {
   return (
     <>
@@ -26,12 +29,12 @@ const ProductStyling = () => {
       <div className="product_styling">
         <div className="product_styling__img_grid">      
           <img
-            src="/src/assets/images/mesarati/mesarati-1.jpg"
+            src={ps1}
             alt=""
             className="product_styling__1"
           />
           <img
-            src="/src/assets/images/mesarati/mesarati-2.jpg"
+            src={ps2}
             alt=""
             className="product_styling__2"
           />

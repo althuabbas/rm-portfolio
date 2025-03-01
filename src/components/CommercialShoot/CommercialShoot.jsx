@@ -1,6 +1,15 @@
 import React from "react";
 import "./CommercialShoot.scss";
 
+import Logo from '../../assets/images/commercial-shoots/american-rag-cie-logo-png-transparent.png'
+import transparent from '../../assets/images/commercial-shoots/work1-6-Photoroom.png'
+import cs1 from '../../assets/images/commercial-shoots/work1-1.jpeg'
+import cs2 from '../../assets/images/commercial-shoots/work1-2.jpeg'
+import cs3 from '../../assets/images/commercial-shoots/work1-3.jpeg'
+import cs4 from '../../assets/images/commercial-shoots/work1-4.jpeg'
+import cs5 from '../../assets/images/commercial-shoots/work1-5.jpeg'
+import cs6 from '../../assets/images/commercial-shoots/work1-6.jpeg'
+
 const CommercialShoot = () => {
   return (
     <>
@@ -28,42 +37,42 @@ const CommercialShoot = () => {
       <div className="commercial_shoot">
         <div className="commercial_shoot__image_grid">
         <img
-            src="/src/assets/images/commercial-shoots/american-rag-cie-logo-png-transparent.png"
+            src={Logo}
             alt=""
             className="commercial_shoot__logo"         
           />
           <img
-            src="/src/assets/images/commercial-shoots/work1-6-Photoroom.png"
+            src={transparent}
             alt=""
             className="commercial_shoot__bg_removed"
           />
           <img
-            src="/src/assets/images/commercial-shoots/work1-1.jpeg"
+            src={cs1}
             alt=""
             className="commercial_shoot__1"
           />
           <img
-            src="/src/assets/images/commercial-shoots/work1-2.jpeg"
+           src={cs2}
             alt=""
             className="commercial_shoot__2"
           />
           <img
-            src="/src/assets/images/commercial-shoots/work1-3.jpeg"
+            src={cs3}
             alt=""
             className="commercial_shoot__3"
           />
           <img
-            src="/src/assets/images/commercial-shoots/work1-4.jpeg"
+           src={cs4}
             alt=""
             className="commercial_shoot__4"
           />
           <img
-            src="/src/assets/images/commercial-shoots/work1-5.jpeg"
+           src={cs5}
             alt=""
             className="commercial_shoot__5"
           />
           <img
-            src="/src/assets/images/commercial-shoots/work1-6.jpeg"
+            src={cs6}
             alt=""
             className="commercial_shoot__6"
           />

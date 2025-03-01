@@ -14,6 +14,11 @@ import Footer from "../../components/Footer/Footer";
 import ProductStyling from "../../components/ProductStyling/ProductStyling";
 import CustomCursor from "../../components/InteractiveCursor/InteractiveCursor";
 
+// advance shoot
+import ad1 from '../../assets/images/advanced-shoot/as1.png'
+import ad2 from '../../assets/images/advanced-shoot/as2.png'
+import ad3 from '../../assets/images/advanced-shoot/as3.png'
+
 const Home = () => {
   const lenisRef = useRef(null);
 
@@ -261,17 +266,17 @@ const Home = () => {
 
           <div className="advanced_shoot__grid_images">
             <img
-              src="/src/assets/images/advanced-shoot/as1.JPG"
+              src={ad1}
               alt=""
               className="ad1"
             />
             <img
-              src="/src/assets/images/advanced-shoot/as2.JPG"
+              src={ad2}
               alt=""
               className="ad2"
             />
             <img
-              src="/src/assets/images/advanced-shoot/as3.JPG"
+              src={ad3}
               alt=""
               className="ad3"
             />

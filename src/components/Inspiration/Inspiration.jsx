@@ -3,6 +3,13 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Inspiration.scss";
 
+import ins1 from '../../assets/images/inspire/mode-1.jpeg'
+import ins2 from '../../assets/images/inspire/mode-2.jpeg'
+import ins3 from '../../assets/images/inspire/mode-3.jpeg'
+import ins4 from '../../assets/images/inspire/mode-4.jpeg'
+import ins5 from '../../assets/images/inspire/mode-5.jpeg'
+import ins6 from '../../assets/images/inspire/mode-6.jpeg'
+
 // Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
@@ -141,13 +148,16 @@ const Inspiration = () => {
     };
   }, []);
 
+  // Create an array of imported images
+  const insImages = [ins1, ins2, ins3, ins4, ins5, ins6];
+
   return (
     <section className="sticky-cards inspire" ref={sectionRef}>
       {/* Cards */}
       {[1, 2, 3, 4, 5, 6].map((num, index) => (
         <div className="card" key={`card-${num}`} ref={addToCardsRef}>
           <div className="card-img">
-            <img src={`/src/assets/images/mode-${num}.jpeg`} alt="" />
+            <img src={insImages[index]} alt={`Inspiration ${num}`} />
           </div>
           <div className="card-content">
             <p>
@@ -169,7 +179,7 @@ const Inspiration = () => {
 
       <div className="inspiration_info wrapper">
         <div className="about-subtitle">THE CREATIVE VISION</div>
-        <h2 className="about-title ">
+        <h2 className="about-title">
           Fashion{" "}
           <strong className="title-highlight">
             inspiration
@@ -179,7 +189,7 @@ const Inspiration = () => {
 
         <p className="about-description">
           My inspiration comes from the world around me—art, culture, and the
-          raw beauty of everyday life. I’m drawn to the stories behind fashion,
+          raw beauty of everyday life. I'm drawn to the stories behind fashion,
           the way it can transform and empower. Iconic designers like Alexander
           McQueen and Iris Van Herpen have always sparked my creativity with
           their ability to merge artistry and innovation. But beyond the runway,

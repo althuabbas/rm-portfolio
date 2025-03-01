@@ -5,6 +5,10 @@ import { Flip } from "gsap/Flip";
 import SplitType from "split-type";
 import "./Hero.scss";
 
+import hero1 from "../../assets/images/al-romaizan/1.jpeg";
+import hero2 from "../../assets/images/taali/17.jpeg";
+import hero3 from "../../assets/images/inframe-dubai/2.jpeg";
+
 gsap.registerPlugin(CustomEase, Flip);
 
 class TextScramble {
@@ -245,16 +249,16 @@ const Hero = () => {
         <div className="hero__images">
           <div className="hero__img hero__main">
             <h6 className="hero__img_name">Kendall Jenner</h6>
-            <img src="/src/assets/images/mode-5.jpeg" alt="Kendall Jenner" />
+            <img src={hero1} alt="Kendall Jenner" />
           </div>
           <div className="hero__img hero__main">
             <h6 className="hero__img_center_name">Naomi Campbell</h6>
-            <img src="/src/assets/images/mode-4.jpeg" alt="Naomi Campbell" />
+            <img src={hero2} alt="Naomi Campbell" />
           </div>
           <div className="hero__img hero__main">
             <h6 className="hero__img_name">Gigi Hadid</h6>
             <img
-              src="/src/assets/images/mode-3.jpeg"
+              src={hero3}
               alt="Gigi Hadid"
               id="heroImage"
             />

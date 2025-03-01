@@ -3,6 +3,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Artist.scss";
 
+import ArtistImg from '../../assets/images/artist/rm5.jpeg'
+
 // Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
@@ -176,7 +178,7 @@ const Artist = () => {
             <div ref={imageOverlayRef} className="image-overlay"></div>
             <img
               ref={aboutImageRef}
-              src="/src/assets/images/artist/rm5.jpeg"
+              src={ArtistImg}
               alt="Fashion Stylist Portrait"
               className="about-image"
             />
