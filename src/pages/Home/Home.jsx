@@ -15,9 +15,9 @@ import ProductStyling from "../../components/ProductStyling/ProductStyling";
 import CustomCursor from "../../components/InteractiveCursor/InteractiveCursor";
 
 // advance shoot
-import ad1 from '../../assets/images/advanced-shoot/as1.png'
-import ad2 from '../../assets/images/advanced-shoot/as2.png'
-import ad3 from '../../assets/images/advanced-shoot/as3.png'
+import ad1 from "../../assets/images/advanced-shoot/as1.png";
+import ad2 from "../../assets/images/advanced-shoot/as2.png";
+import ad3 from "../../assets/images/advanced-shoot/as3.png";
 
 const Home = () => {
   const lenisRef = useRef(null);
@@ -144,6 +144,7 @@ const Home = () => {
     <>
       {/* Hero */}
       <Hero />
+
       {/* <Link to="/client/fp-model-agency">Go to fp-model-agency's Details</Link>
       <Link to="/client/sweet-lady">Go to sweet-lady's Details</Link> */}
 
@@ -197,26 +198,25 @@ const Home = () => {
       <section>
         <CustomCursor
           hoverSelectors={[".mood_board_image"]}
-          text="Hover To Hold"
-          redirectLink="/client/fp-model-agency"
+          text="Hover To Hold"        
         />
         <div className="mood_board_assist">
           <div className="mood_board__text_area wrapper">
             <h4 className="about-title wrapper">
-            fad talents With/{" "}
+              fad talents With/{" "}
               <strong className="title-highlight">
-                 Designers & us
+                Designers & us
                 <span className="title-highlight-span"></span>
               </strong>{" "}
             </h4>
 
             <div className="mood_board__info">
-            <ul className="mood_board__list">
-              <li>Creative director: Seher Khan</li>
-              <li>Photographer: Jef Anog</li>
-              <li>Riha Mehindi X Kristina Fidelskaya</li>
-            </ul>
-          </div>
+              <ul className="mood_board__list">
+                <li>Creative director: Seher Khan</li>
+                <li>Photographer: Jef Anog</li>
+                <li>Riha Mehindi X Kristina Fidelskaya</li>
+              </ul>
+            </div>
           </div>
 
           <div className="mood_board_assist__spacing">
@@ -265,21 +265,9 @@ const Home = () => {
           </div>
 
           <div className="advanced_shoot__grid_images">
-            <img
-              src={ad1}
-              alt=""
-              className="ad1"
-            />
-            <img
-              src={ad2}
-              alt=""
-              className="ad2"
-            />
-            <img
-              src={ad3}
-              alt=""
-              className="ad3"
-            />
+            <img src={ad1} alt="" className="ad1" />
+            <img src={ad2} alt="" className="ad2" />
+            <img src={ad3} alt="" className="ad3" />
           </div>
         </div>
       </section>

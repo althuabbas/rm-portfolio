@@ -6,7 +6,8 @@ import SplitType from "split-type";
 import "./Hero.scss";
 
 import hero1 from "../../assets/images/al-romaizan/1.jpeg";
-import hero2 from "../../assets/images/taali/17.jpeg";
+import hero2 from "../../assets/images/taali/4.jpeg";
+// import hero2 from "../../assets/images/taali/17.jpeg";
 import hero3 from "../../assets/images/inframe-dubai/2.jpeg";
 
 gsap.registerPlugin(CustomEase, Flip);
@@ -265,7 +266,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="hero__content">
+        <div className="hero__content wrapper">
           <div className="hero__text-container">
             <div className="text hero__artist-title" ref={textRef}></div>
             <div className="hero__artist-tags">

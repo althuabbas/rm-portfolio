@@ -8,7 +8,6 @@ const Footer = () => {
         <div className="footer-top">
           {/* Left column - Logo and email */}
           <div className="footer-column">
-           
             <div className="email-section">
               <p className="email-label">// SHOOT US AN EMAIL</p>
               <a href="mailto:hello@rihamehindi.com" className="email-link">
@@ -58,7 +57,9 @@ const Footer = () => {
                   <a href="#">Discord</a>
                 </li>
                 <li>
-                  <a href="#">Instagram</a>
+                  <a href="https://www.instagram.com/riha_mehindi/">
+                    Instagram
+                  </a>
                 </li>
               </ul>
             </nav>

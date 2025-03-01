@@ -6,7 +6,7 @@ const CustomCursor = ({
   hoverSelectors = [], 
   text = "View more",
   linkAttribute = "data-link" ,
-  redirectLink
+  // redirectLink
   // Add a prop to specify which attribute contains the URL
 }) => {
   const cursorRef = useRef(null);
@@ -53,15 +53,15 @@ const CustomCursor = ({
     }
   }, []);
 
-  // Handle element click to redirect
-  const handleElementClick = useCallback((e) => {
-    // const link = e.currentTarget.getAttribute(linkAttribute);
-    if (redirectLink) {
-      window.location.href = redirectLink;
-      // window.location.href = link;
-      // Alternatively for React Router: history.push(link)
-    }
-  }, [redirectLink]);
+  // // Handle element click to redirect
+  // const handleElementClick = useCallback((e) => {
+  //   // const link = e.currentTarget.getAttribute(linkAttribute);
+  //   if (redirectLink) {
+  //     window.location.href = redirectLink;
+  //     // window.location.href = link;
+  //     // Alternatively for React Router: history.push(link)
+  //   }
+  // }, [redirectLink]);
 
   useEffect(() => {
     // Add mousemove event listener for cursor
@@ -80,7 +80,7 @@ const CustomCursor = ({
       elements.forEach((el) => {
         el.addEventListener("mouseenter", () => handleElementHover(true));
         el.addEventListener("mouseleave", () => handleElementHover(false));
-        el.addEventListener("click", handleElementClick);
+        // el.addEventListener("click", handleElementClick);
         elementsToTrack.push(el);
       });
     });
@@ -91,10 +91,10 @@ const CustomCursor = ({
       elementsToTrack.forEach((el) => {
         el.removeEventListener("mouseenter", () => handleElementHover(true));
         el.removeEventListener("mouseleave", () => handleElementHover(false));
-        el.removeEventListener("click", handleElementClick);
+        // el.removeEventListener("click", handleElementClick);
       });
     };
-  }, [moveCursor, handleElementHover, handleElementClick, hoverSelectors]);
+  }, [moveCursor, handleElementHover, hoverSelectors]);
 
   return (
     <div className="custom-cursor" ref={cursorRef}>
