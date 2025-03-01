@@ -9,7 +9,7 @@ import ClientDetails from "./pages/ClientDetails/ClientDetails";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/rm-portfolio/">
       <Header />
       <Routes>
         <Route>
