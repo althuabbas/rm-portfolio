@@ -37,45 +37,45 @@ const WorkedWith = () => {
 
   const menuItems = [
     {
-      info: "jewelry",
-      name: "Riha Mehindi X FP model agency",
-      tag: "Creative Design",
+      info: "outfits",
+      name: "Riha Mehindi X taali",
+      tag: "Stylist",
     },
     {
-      info: "Jaarvis",
+      info: "Stylist",
       name: "Riha Mehindi X Sweet lady",
       tag: "Event",
     },
     {
-      info: "jewelry",
+      info: "outfits",
       name: "Riha Mehindi X So fear clock ",
       tag: "Creative Concept",
     },
     {
-      info: "Grid",
+      info: "outfits",
       name: "Riha Mehindi X Bridel",
       tag: "Art Direction",
     },
     {
-      info: "jewelry",
+      info: "outfits",
       name: "Riha Mehindi X infame dubai",
       tag: "Direction",
     },
     {
       info: "jewelry",
       name: "Riha Mehindi X bijouq italy",
-      tag: "Direction",
+      tag: "Stylist",
     },
     {
       info: "jewelry",
       name: "Riha Mehindi X al romaizan",
-      tag: "Direction",
-    },
+      tag: "Stylist",
+    }, 
     {
-      info: "jewelry",
-      name: "Riha Mehindi X taali",
-      tag: "Direction",
-    },
+      info: "outfits",
+      name: "Riha Mehindi X FP model agency",
+      tag: "Creative Design",
+    },  
   ];
 
   // Detect mobile devices and screen size changes

@@ -102,9 +102,9 @@ const Footer = () => {
           <p>©2025 RIHA MEHINDI™ // ALL RIGHTS RESERVED</p>
           <div className="footer-bottom-links">
             <a href="#">WE RESPECT YOUR PRIVACY</a>
-            <p>
+            {/* <p>
               WEBSITE BY <a href="#">HNY</a>
-            </p>
+            </p> */}
           </div>
         </div>
       </div>

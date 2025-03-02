@@ -214,7 +214,7 @@ const Home = () => {
               <ul className="mood_board__list">
                 <li>Creative director: Seher Khan</li>
                 <li>Photographer: Jef Anog</li>
-                <li>Riha Mehindi X Kristina Fidelskaya</li>
+                <li>Riha Mehindi X Designers & us</li>
               </ul>
             </div>
           </div>

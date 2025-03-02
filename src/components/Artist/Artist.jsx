@@ -214,7 +214,7 @@ const Artist = () => {
               <div className="stat-item">
                 <div
                   ref={(el) => addToStatNumbersRef(el, 0)}
-                  data-value="10"
+                  data-value="2"
                   className="stat-number"
                 >
                   0
@@ -224,7 +224,7 @@ const Artist = () => {
               <div className="stat-item">
                 <div
                   ref={(el) => addToStatNumbersRef(el, 1)}
-                  data-value="135"
+                  data-value="18"
                   className="stat-number"
                 >
                   0
@@ -234,7 +234,7 @@ const Artist = () => {
               <div className="stat-item">
                 <div
                   ref={(el) => addToStatNumbersRef(el, 2)}
-                  data-value="85"
+                  data-value="6"
                   className="stat-number"
                 >
                   0
