@@ -1,0 +1,364 @@
+@use "../../styles/utils/breakepoints" as bp;
+@use "../../styles/utils/functions" as u;
+@use "../../styles/variables" as vars;
+
+.louis-vuitton-background {
+  width: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.2) 0%,
+    rgba(184, 134, 11, 0.15) 50%,
+    rgba(218, 165, 32, 0.25) 100%
+  );
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+
+  /* Gradient overlays with enhanced styling */
+  .top-gradient {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(
+      to bottom,
+      rgba(vars.$primary_dark, 0.9),
+      transparent
+    );
+    z-index: 1;
+    backdrop-filter: blur(2px);
+  }
+
+  .bottom-gradient {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(
+      to top,
+      rgba(vars.$primary_dark, 0.9),
+      transparent
+    );
+    z-index: 1;
+    backdrop-filter: blur(2px);
+  }
+
+  /* Logo pattern container */
+  .logo-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+
+    .floating-logo {
+      position: absolute;
+      object-fit: contain;
+      filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.3));
+      animation: floatAnimation infinite alternate ease-in-out;
+      pointer-events: none; /* Prevent logos from interfering with clicks */
+    }
+  }
+}
+
+/* Floating animation for logos */
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(-10px) translateX(-10px) rotate(-1deg) scale(0.98);
+  }
+  25% {
+    transform: translateY(5px) translateX(-5px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(10px) translateX(5px) rotate(1deg) scale(1.02);
+  }
+  75% {
+    transform: translateY(5px) translateX(10px) rotate(0deg) scale(1);
+  }
+  100% {
+    transform: translateY(-10px) translateX(5px) rotate(-1deg) scale(0.98);
+  }
+}
+
+.louis-vuitton-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2; /* Place content above the overlay */
+}
+
+.louis-vuitton-title {
+  text-align: center;
+}
+
+.louis-vuitton-description {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-family: "Bricolage Grotesque", serif;
+    color: vars.$light;
+    font-style: italic;
+  }
+}
+
+.louis-vuitton-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(250px, auto);
+  gap: 20px;
+  grid-template-areas:
+    "img1 img2 img3"
+    "img1 img4 img5";
+  margin-bottom: 3rem;
+}
+
+.grid-item {
+  overflow: hidden;
+  border-radius: 0; // Squared corners for a more luxury feel
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  &:nth-child(1) {
+    grid-area: img1;
+  }
+
+  &:nth-child(2) {
+    grid-area: img2;
+  }
+
+  &:nth-child(3) {
+    grid-area: img3;
+  }
+
+  &:nth-child(4) {
+    grid-area: img4;
+  }
+
+  &:nth-child(5) {
+    grid-area: img5;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+
+    &:hover {
+      transform: scale(1.08);
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+.louis-vuitton-credits {
+  text-align: left;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  
+  .credits-heading {
+    text-align: center;
+    font-family: "Bodoni Moda", serif;
+    font-size: 1.8rem;
+    color: vars.$light;
+    margin-bottom: 2rem;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background-color: rgba(244, 177, 8, 0.55);
+    }
+  }
+  
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+    padding: 0;
+    margin: 0;
+
+    li {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 1rem;
+      min-width: 150px;
+    }
+  }
+}
+
+.louis-vuitton-credits-title {
+  text-transform: uppercase;
+  font-family: "Bricolage Grotesque";
+  font-size: 0.7rem;
+  color: vars.$off-light;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.louis-vuitton-credits-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-family: "Bodoni Moda", serif;
+  
+  span {
+    font-size: 0.9rem;
+  }
+}
+
+.louis-vuitton-credits-item a {
+  color: vars.$light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(244, 177, 8, 0.55);
+  transition: color 0.3s ease, transform 0.3s ease;
+  
+  &:hover {
+    color: rgba(244, 177, 8, 0.85);
+    transform: scale(1.1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .louis-vuitton-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "img1 img2"
+      "img3 img4"
+      "img5 img5";
+  }
+}
+
+@media (max-width: 768px) {
+  .louis-vuitton-title {
+    font-size: 2rem;
+  }
+
+  .louis-vuitton-description p {
+    font-size: 1rem;
+  }
+
+  .louis-vuitton-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "img1 img2"
+      "img3 img4"
+      "img5 img5";
+  }
+
+  .louis-vuitton-credits {
+    .credits-heading {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    ul {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      
+      li {
+        min-width: 120px;
+        margin-bottom: 1.5rem;
+      }
+    }
+    
+    .louis-vuitton-credits-item {
+      span {
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .louis-vuitton-title {
+    font-size: 1.8rem;
+  }
+
+  .louis-vuitton-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "img1"
+      "img2"
+      "img3"
+      "img4"
+      "img5";
+  }
+
+  .louis-vuitton-credits {
+    .credits-heading {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      
+      li {
+        width: 100%;
+        max-width: 250px;
+        margin-bottom: 1rem;
+      }
+    }
+    
+    .louis-vuitton-credits-item {
+      span {
+        font-size: 0.8rem;
+      }
+    }
+    
+    .louis-vuitton-credits-title {
+      font-size: 0.65rem;
+    }
+  }
+}

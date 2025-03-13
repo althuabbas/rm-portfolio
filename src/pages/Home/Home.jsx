@@ -18,6 +18,7 @@ import CustomCursor from "../../components/InteractiveCursor/InteractiveCursor";
 import ad1 from "../../assets/images/advanced-shoot/as1.png";
 import ad2 from "../../assets/images/advanced-shoot/as2.png";
 import ad3 from "../../assets/images/advanced-shoot/as3.png";
+import LouisVuitton from "../../components/LouisVuitton/LouisVuitton";
 
 const Home = () => {
   const lenisRef = useRef(null);
@@ -159,6 +160,11 @@ const Home = () => {
         <Inspiration />
       </section>
 
+      {/* Louis Vuitton */}
+      <section>
+        <LouisVuitton />
+      </section>
+
       {/* Commercial Shoot */}
       <section>
         <CommercialShoot />
@@ -198,7 +204,7 @@ const Home = () => {
       <section>
         <CustomCursor
           hoverSelectors={[".mood_board_image"]}
-          text="Hover To Hold"        
+          text="Hover To Hold"
         />
         <div className="mood_board_assist">
           <div className="mood_board__text_area wrapper">
