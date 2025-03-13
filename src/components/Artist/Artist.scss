@@ -4,10 +4,20 @@
 
 .artist {
     max-width: 1400px;
-    margin: 0 auto;
-    // padding: 80px 20px;
+    margin: 80px auto 0;
+    padding: 0 20px;
     overflow: hidden;
     position: relative;
+
+    @include bp.breakpoint-down(small) {
+      margin: 60px auto 0;
+      padding: 0 15px 60px;
+    }
+
+    @include bp.breakpoint-down(xsmall) {
+      margin: 40px auto 0;
+      padding: 0 15px 40px;
+    }
   }
   
   .about-container {
@@ -15,12 +25,18 @@
     grid-template-columns: 1fr;
     gap: 40px;
     position: relative;
-  }
-  
-  @media (min-width: 992px) {
-    .about-container {
+
+    @include bp.breakpoint(large) {
       grid-template-columns: 1fr 1fr;
       align-items: center;
+    }
+
+    @include bp.breakpoint-range(medium, medium-large) {
+      gap: 30px;
+    }
+
+    @include bp.breakpoint-down(small) {
+      gap: 25px;
     }
   }
   
@@ -30,6 +46,18 @@
     border-radius: 4px;
     aspect-ratio: 3/4;
     max-height: 85vh;
+    margin: 0 auto;
+    width: 100%;
+    
+    @include bp.breakpoint-range(medium, medium-large) {
+      max-width: 80%;
+      max-height: 70vh;
+    }
+    
+    @include bp.breakpoint-down(small) {
+      max-width: 100%;
+      max-height: 60vh;
+    }
   }
   
   .about-image {
@@ -52,6 +80,14 @@
     padding: 20px;
     opacity: 0;
     transform: translateY(30px);
+    
+    @include bp.breakpoint-range(medium, medium-large) {
+      padding: 15px 25px;
+    }
+    
+    @include bp.breakpoint-down(small) {
+      padding: 10px 15px;
+    }
   }
   
   .about-subtitle {
@@ -63,6 +99,12 @@
     margin-bottom: 15px;
     display: flex;
     align-items: center;
+    
+    @include bp.breakpoint-down(small) {
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
   }
   
   .about-subtitle:before {
@@ -72,6 +114,11 @@
     height: 1px;
     background-color: #888;
     margin-right: 15px;
+    
+    @include bp.breakpoint-down(small) {
+      width: 20px;
+      margin-right: 10px;
+    }
   }
   
   .about-title {
@@ -80,7 +127,22 @@
     margin-bottom: 40px;
     line-height: 1.1; 
     text-transform: uppercase;  
-    font-family: "Bodoni Moda",serif;  
+    font-family: "Bodoni Moda",serif;
+    
+    @include bp.breakpoint-range(medium, medium-large) {
+      font-size: 40px;
+      margin-bottom: 30px;
+    }
+    
+    @include bp.breakpoint-down(small) {
+      font-size: 32px;
+      margin-bottom: 25px;
+    }
+    
+    @include bp.breakpoint-down(xsmall) {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
   }
   
   .about-title strong {
@@ -105,6 +167,11 @@
     z-index: -1;
     transform: scaleX(0);
     transform-origin: left;
+    
+    @include bp.breakpoint-down(small) {
+      height: 6px;
+      bottom: 3px;
+    }
   }
   
   .about-description {
@@ -113,6 +180,18 @@
     color: #888;
     margin-bottom: 30px;
     max-width: 600px;
+    
+    @include bp.breakpoint-range(medium, medium-large) {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+    
+    @include bp.breakpoint-down(small) {
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
   }
   
   .about-signature {
@@ -121,6 +200,16 @@
     font-style: italic;
     color: vars.$off-light;
     margin-top: 40px;
+    
+    @include bp.breakpoint-range(medium, medium-large) {
+      font-size: 28px;
+      margin-top: 30px;
+    }
+    
+    @include bp.breakpoint-down(small) {
+      font-size: 24px;
+      margin-top: 25px;
+    }
   }
   
   .cursor-follower {
@@ -134,14 +223,9 @@
     mix-blend-mode: difference;
     transform: translate(-50%, -50%);
     opacity: 0;
-  }
-  
-  @media (max-width: 768px) {
-    .cursor-follower {
+    
+    @include bp.breakpoint-down(medium-large) {
       display: none;
-    }
-    .about-title {
-      font-size: 36px;
     }
   }
   
@@ -152,6 +236,21 @@
     margin-top: 40px;
     opacity: 0;
     transform: translateY(20px);
+    
+    @include bp.breakpoint-range(medium, medium-large) {
+      margin-top: 30px;
+      gap: 15px;
+    }
+    
+    @include bp.breakpoint-down(small) {
+      margin-top: 25px;
+      gap: 10px;
+    }
+    
+    @include bp.breakpoint-down(xsmall) {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 20px;
+    }
   }
   
   .stat-item {
@@ -163,6 +262,19 @@
     font-weight: 200;
     margin-bottom: 5px;
     color: vars.$off-light;
+    
+    @include bp.breakpoint-range(medium, medium-large) {
+      font-size: 36px;
+    }
+    
+    @include bp.breakpoint-down(small) {
+      font-size: 32px;
+      margin-bottom: 3px;
+    }
+    
+    @include bp.breakpoint-down(xsmall) {
+      font-size: 28px;
+    }
   }
   
   .stat-label {
@@ -170,4 +282,9 @@
     color: #888;
     text-transform: uppercase;
     letter-spacing: 1px;
+    
+    @include bp.breakpoint-down(small) {
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
   }

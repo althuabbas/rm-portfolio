@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Artist.scss";
@@ -18,33 +18,53 @@ const Artist = () => {
   const statsContainerRef = useRef(null);
   const statNumbersRef = useRef([]);
   const sectionRef = useRef(null);
+  
+  // State to track device size for responsive animations
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Custom cursor
+    // Check if device is mobile or tablet
+    const checkDeviceSize = () => {
+      setIsMobile(window.innerWidth < 992);
+    };
+    
+    // Initial check
+    checkDeviceSize();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkDeviceSize);
+    
+    // Custom cursor (only for desktop)
     const cursor = cursorRef.current;
 
     const handleMouseMove = (e) => {
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.3,
-      });
+      if (window.innerWidth >= 992) {
+        gsap.to(cursor, {
+          x: e.clientX,
+          y: e.clientY,
+          duration: 0.3,
+        });
+      }
     };
 
     const handleMouseEnter = () => {
-      gsap.to(cursor, {
-        opacity: 1,
-        scale: 1,
-        duration: 0.3,
-      });
+      if (window.innerWidth >= 992) {
+        gsap.to(cursor, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.3,
+        });
+      }
     };
 
     const handleMouseLeave = () => {
-      gsap.to(cursor, {
-        opacity: 0,
-        scale: 0,
-        duration: 0.3,
-      });
+      if (window.innerWidth >= 992) {
+        gsap.to(cursor, {
+          opacity: 0,
+          scale: 0,
+          duration: 0.3,
+        });
+      }
     };
 
     // Add event listeners
@@ -56,14 +76,17 @@ const Artist = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 80%", // Start animation when the top of the section hits 80% from the top of viewport
+        start: isMobile ? "top 90%" : "top 80%", // Adjust trigger point for mobile
         toggleActions: "play none none none", // Play animation once when scrolled into view
       }
     });
 
+    // Adjust animation timing based on device
+    const animationSpeed = isMobile ? 0.8 : 1.2;
+
     tl.to(imageOverlayRef.current, {
       scaleY: 0,
-      duration: 1.2,
+      duration: animationSpeed,
       ease: "power4.out",
     })
       .to(
@@ -71,7 +94,7 @@ const Artist = () => {
         {
           scale: 1,
           opacity: 1,
-          duration: 1.6,
+          duration: animationSpeed + 0.4,
           ease: "power4.out",
         },
         "-=0.9"
@@ -81,7 +104,7 @@ const Artist = () => {
         {
           opacity: 1,
           y: 0,
-          duration: 1,
+          duration: animationSpeed - 0.2,
           ease: "power3.out",
         },
         "-=1.2"
@@ -90,7 +113,7 @@ const Artist = () => {
         titleHighlightRef.current,
         {
           scaleX: 1,
-          duration: 0.8,
+          duration: animationSpeed - 0.4,
           ease: "power2.out",
         },
         "-=0.6"
@@ -100,7 +123,7 @@ const Artist = () => {
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: animationSpeed - 0.4,
           ease: "power2.out",
         },
         "-=0.6"
@@ -114,7 +137,7 @@ const Artist = () => {
 
       gsap.to(stat, {
         innerText: value,
-        duration: 2,
+        duration: isMobile ? 1.5 : 2,
         ease: "power2.out",
         snap: { innerText: 1 },
         scrollTrigger: {
@@ -129,33 +152,38 @@ const Artist = () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener('resize', checkDeviceSize);
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, []); // Empty dependency array means this runs once on mount
+  }, [isMobile]); // Re-run when isMobile changes
 
   // Image hover effect handlers
   const handleImageEnter = () => {
-    gsap.to(aboutImageRef.current, {
-      scale: 1.05,
-      duration: 0.8,
-      ease: "power2.out",
-    });
-    gsap.to(cursorRef.current, {
-      scale: 2.5,
-      duration: 0.3,
-    });
+    if (!isMobile) {
+      gsap.to(aboutImageRef.current, {
+        scale: 1.05,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+      gsap.to(cursorRef.current, {
+        scale: 2.5,
+        duration: 0.3,
+      });
+    }
   };
 
   const handleImageLeave = () => {
-    gsap.to(aboutImageRef.current, {
-      scale: 1,
-      duration: 0.8,
-      ease: "power2.out",
-    });
-    gsap.to(cursorRef.current, {
-      scale: 1,
-      duration: 0.3,
-    });
+    if (!isMobile) {
+      gsap.to(aboutImageRef.current, {
+        scale: 1,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+      gsap.to(cursorRef.current, {
+        scale: 1,
+        duration: 0.3,
+      });
+    }
   };
 
   // Add stats number to refs array
@@ -197,11 +225,11 @@ const Artist = () => {
               beyond the ordinary
             </h2>
             <p className="about-description">
-              welcome to my creative world! I'm Riha Mehindi, a fashion stylist
+              welcome to my creative world! I&apos;m Riha Mehindi, a fashion stylist
               with a passion for blending luxury and innovation. From editorial
               shoots to commercial projects, I thrive on crafting looks that
               tell stories.My journey in fashion has been all about pushing
-              boundaries and embracing bold ideas. Let's dive into a world where
+              boundaries and embracing bold ideas. Let&apos;s dive into a world where
               style meets creativity, and every detail speaks volumes.
             </p>
             <p className="about-description">

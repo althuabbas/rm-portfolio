@@ -3,12 +3,12 @@ import "./CommercialShoot.scss";
 
 import Logo from '../../assets/images/commercial-shoots/american-rag-cie-logo-png-transparent.png'
 import transparent from '../../assets/images/commercial-shoots/work1-6-Photoroom.png'
-import cs1 from '../../assets/images/commercial-shoots/work1-1.jpeg'
-import cs2 from '../../assets/images/commercial-shoots/work1-2.jpeg'
-import cs3 from '../../assets/images/commercial-shoots/work1-3.jpeg'
-import cs4 from '../../assets/images/commercial-shoots/work1-4.jpeg'
-import cs5 from '../../assets/images/commercial-shoots/work1-5.jpeg'
-import cs6 from '../../assets/images/commercial-shoots/work1-6.jpeg'
+import cs1 from '../../assets/images/commercial-shoots/work1-1.webp'
+import cs2 from '../../assets/images/commercial-shoots/work1-2.webp'
+import cs3 from '../../assets/images/commercial-shoots/work1-3.webp'
+import cs4 from '../../assets/images/commercial-shoots/work1-4.webp'
+import cs5 from '../../assets/images/commercial-shoots/work1-5.webp'
+import cs6 from '../../assets/images/commercial-shoots/work1-6.webp'
 
 const CommercialShoot = () => {
   return (
