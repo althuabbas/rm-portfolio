@@ -79,7 +79,7 @@ a:active {
 section {
   margin-top: 60px;
   @include bp.breakpoint(large) {
-    margin-top: 100px;
+    margin-top: 100px;    
   }
 }
 
@@ -87,7 +87,13 @@ section {
   font-family: "Bodoni Moda", serif;
 }
 
+.spacing{
+  margin-top: 100px;
 
+  @include bp.breakpoint(large) {
+    margin-top: 200px;   
+  }
+}
 
 // .marquee {
 //   position: relative;

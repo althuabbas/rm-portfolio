@@ -218,16 +218,16 @@ const Home = () => {
       </section>
 
       {/* Commercial Shoot */}
-      <section>
+      <section className="spacing">
         <CommercialShoot />
       </section>
 
-      <section>
+      <section className="spacing">
         <ProductStyling />
       </section>
 
       {/* Mood Board */}
-      <section className="mood_board">
+      <section className="mood_board spacing">
         <div className="mood_board__text_area wrapper">
           {/* <h2 className="mood_board__header header_text">Editorial Styling</h2> */}
           <h2 className="about-title">
@@ -253,14 +253,14 @@ const Home = () => {
         </div>
       </section>
 
-      <section>
+      <section className="spacing">
         <CustomCursor
           hoverSelectors={[".mood_board_image"]}
           text="Hover To Hold"
         />
         <div className="mood_board_assist">
           <div className="mood_board__text_area wrapper">
-            <h4 className="about-title wrapper">
+            <h4 className="about-title">
               fad talents With/{" "}
               <strong className="title-highlight">
                 Designers & us
@@ -301,7 +301,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section>
+      <section className="spacing">
         <div className="advanced_shoot wrapper">
           <div className="mood_board__text_area">
             {/* <h2 className="advanced_shoot__header header_text">

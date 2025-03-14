@@ -4,7 +4,7 @@
 
 .artist {
     max-width: 1400px;
-    margin: 0 auto;
+     margin-inline: auto;
     // padding: 80px 20px;
     overflow: hidden;
     position: relative;
@@ -63,6 +63,8 @@
     margin-bottom: 15px;
     display: flex;
     align-items: center;
+
+    
   }
   
   .about-subtitle:before {
@@ -77,10 +79,15 @@
   .about-title {
     font-size: 48px;
     font-weight: 300;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
     line-height: 1.1; 
     text-transform: uppercase;  
-    font-family: "Bodoni Moda",serif;  
+    // font-family: "Bodoni Moda",serif;  
+    font-family: "Bricolage Grotesque", sans-serif;
+
+    @include bp.breakpoint(large) {
+      margin-bottom: 40px;
+    }
   }
   
   .about-title strong {

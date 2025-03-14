@@ -14,11 +14,9 @@ const VideoSlider = ({videoData}) => {
   const [videoLoaded, setVideoLoaded] = useState(Array(videoData?.length || 0).fill(false));
   const [expandedDescriptions, setExpandedDescriptions] = useState(Array(videoData?.length || 0).fill(false));
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [videoDurations, setVideoDurations] = useState(Array(videoData?.length || 0).fill(0));
   const videoRefs = useRef([]);
-  const progressIntervalRef = useRef(null);
   const horizontalSliderRef = useRef(null);
-  const progressDuration = 10000; // 10 seconds per video
-  const progressStep = 10; // Update progress every 10ms
 
   // Check device size
   useEffect(() => {
@@ -35,42 +33,53 @@ const VideoSlider = ({videoData}) => {
     };
   }, []);
 
-  // Handle video progress for mobile
+  // Handle video progress and duration for mobile
   useEffect(() => {
-    if (isMobile && isPlaying) {
+    const currentVideo = videoRefs.current[currentIndex];
+    
+    if (isMobile && isPlaying && currentVideo) {
       // Reset progress when changing videos
       setProgress(0);
+      
+      const handleTimeUpdate = () => {
+        const currentTime = currentVideo.currentTime;
+        const duration = videoDurations[currentIndex];
+        const progressPercentage = (currentTime / duration) * 100;
+        
+        setProgress(progressPercentage);
+        
+        // Move to next video when current one ends
+        if (currentTime >= duration) {
+          handleNext();
+        }
+      };
 
-      // Clear any existing interval
-      if (progressIntervalRef.current) {
-        clearInterval(progressIntervalRef.current);
-      }
-
-      // Start new progress interval
-      progressIntervalRef.current = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(progressIntervalRef.current);
-            // Move to next video when progress completes
-            handleNext();
-            return 0;
-          }
-          return prev + (progressStep / progressDuration) * 100;
-        });
-      }, progressStep);
-
+      // Add timeupdate event listener
+      currentVideo.addEventListener('timeupdate', handleTimeUpdate);
+      
       // Play the current video
-      if (videoRefs.current[currentIndex]) {
-        videoRefs.current[currentIndex].play();
-      }
-    }
+      currentVideo.play();
 
-    return () => {
-      if (progressIntervalRef.current) {
-        clearInterval(progressIntervalRef.current);
-      }
-    };
-  }, [currentIndex, isMobile, isPlaying]);
+      return () => {
+        if (currentVideo) {
+          currentVideo.removeEventListener('timeupdate', handleTimeUpdate);
+        }
+      };
+    }
+  }, [currentIndex, isMobile, isPlaying, videoDurations]);
+
+  // Handle video duration updates
+  const handleLoadedMetadata = (index) => {
+    const video = videoRefs.current[index];
+    if (video) {
+      const duration = video.duration;
+      setVideoDurations(prev => {
+        const newDurations = [...prev];
+        newDurations[index] = duration;
+        return newDurations;
+      });
+    }
+  };
 
   // Pause/play videos based on current index
   useEffect(() => {
@@ -230,11 +239,12 @@ const VideoSlider = ({videoData}) => {
                 <video
                   ref={(el) => (videoRefs.current[index] = el)}
                   src={video.src}
-                  loop
+                  loop={false}
                   muted={isMuted}
                   playsInline
                   onClick={togglePlayPause}
                   onLoadedData={() => handleVideoLoad(index)}
+                  onLoadedMetadata={() => handleLoadedMetadata(index)}
                   style={{ display: videoLoaded[index] ? 'block' : 'none' }}
                 />
                 <div className="video-info">
@@ -314,6 +324,7 @@ const VideoSlider = ({videoData}) => {
                   muted={isMuted}
                   playsInline
                   onLoadedData={() => handleVideoLoad(index)}
+                  onLoadedMetadata={() => handleLoadedMetadata(index)}
                   style={{ display: videoLoaded[index] ? 'block' : 'none' }}
                   onClick={() => {
                     if (videoRefs.current[index].paused) {
@@ -411,6 +422,7 @@ const VideoSlider = ({videoData}) => {
                 muted={isMuted}
                 playsInline
                 onLoadedData={() => handleVideoLoad(index)}
+                onLoadedMetadata={() => handleLoadedMetadata(index)}
                 style={{ display: videoLoaded[index] ? 'block' : 'none' }}
                 onClick={() => {
                   if (videoRefs.current[index].paused) {

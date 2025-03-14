@@ -9,7 +9,7 @@ import lv4 from "../../assets/images/LV/lv-4.jpeg";
 import lv5 from "../../assets/images/LV/lv-5.jpeg";
 import lvLogo from "../../assets/images/LV/lv-logo.png";
 import villa88Logo from "../../assets/images/LV/Villa88-Logo-gold.png";
-import { InstagramLogo } from "@phosphor-icons/react";
+import { CaretRight, InstagramLogo } from "@phosphor-icons/react";
 
 const LouisVuitton = () => {
   const [logos, setLogos] = useState([]);
@@ -20,43 +20,8 @@ const LouisVuitton = () => {
       const newLogos = [];
       const isMobile = window.innerWidth < 768;
 
-      // Create a more structured, arranged pattern
-      if (isMobile) {
-        // Mobile pattern - 3x3 grid
-        for (let row = 0; row < 3; row++) {
-          for (let col = 0; col < 3; col++) {
-            // Center position for each cell in the grid
-            const left = col * 33.33 + 16.67; // Evenly spaced columns
-            const top = row * 33.33 + 16.67; // Evenly spaced rows
-
-            // Alternate between LV and Villa88 logos in a checkerboard pattern
-            const isVilla = (row + col) % 2 === 0;
-
-            // Size based on position - center is largest
-            const isCenter = row === 1 && col === 1;
-            const size = isCenter ? 80 : 60;
-
-            // Minimal animation properties for a more structured look
-            const delay = (row + col) * 0.5; // Sequential delays
-            const duration = 50 + row * col; // Varied but predictable durations
-            const opacity = isCenter ? 0.7 : 0.5;
-
-            newLogos.push({
-              id: row * 3 + col,
-              src: isVilla ? villa88Logo : lvLogo,
-              style: {
-                width: `${size}px`,
-                height: `${size}px`,
-                left: `calc(${left}% - ${size / 2}px)`,
-                top: `calc(${top}% - ${size / 2}px)`,
-                animationDelay: `${delay}s`,
-                animationDuration: `${duration}s`,
-                opacity,
-              },
-            });
-          }
-        }
-      } else {
+      // Only generate logos for desktop screens
+      if (!isMobile) {
         // Desktop pattern - diamond/rhombus arrangement
 
         // Central logo
@@ -190,14 +155,16 @@ const LouisVuitton = () => {
 
   return (
     <div>
-        
-      <h2 className="about-title louis-vuitton-title">
-        Louis Vuitton{"  "} X {"  "}
-        <strong className="title-highlight">
-          Villa88 Magazine
-          <span className="title-highlight-span"></span>
-        </strong>{" "}
-      </h2>
+      <div>
+        <div className="louis-vuitton-subtitle">Ramadan Collection</div>
+        <h2 className="about-title louis-vuitton-title">
+          Louis Vuitton{"  "} X {"  "}
+          <strong className="title-highlight">
+            Villa88 Magazine
+            <span className="title-highlight-span"></span>
+          </strong>{" "}
+        </h2>
+      </div>
 
       <div className="louis-vuitton-background">
         <div className="top-gradient"></div>
@@ -264,7 +231,7 @@ const LouisVuitton = () => {
                     className="instagram-icon"
                     aria-label="Mehmet Erzincan Instagram"
                   >
-                    <InstagramLogo size={20} weight="regular" />
+                    <CaretRight  size={20} weight="regular" />
                   </a>
                 </div>
                 <span className="louis-vuitton-credits-title">
@@ -281,7 +248,7 @@ const LouisVuitton = () => {
                     className="instagram-icon"
                     aria-label="Polina Shabelnikova Instagram"
                   >
-                    <InstagramLogo size={20} weight="regular" />
+                    <CaretRight  size={20} weight="regular" />
                   </a>
                 </div>
                 <span className="louis-vuitton-credits-title">Stylist</span>
@@ -296,7 +263,7 @@ const LouisVuitton = () => {
                     className="instagram-icon"
                     aria-label="Riha Mehindi Instagram"
                   >
-                    <InstagramLogo size={20} weight="regular" />
+                    <CaretRight  size={20} weight="regular" />
                   </a>
                 </div>
                 <span className="louis-vuitton-credits-title">
@@ -313,7 +280,7 @@ const LouisVuitton = () => {
                     className="instagram-icon"
                     aria-label="Safiyah Cassim Instagram"
                   >
-                    <InstagramLogo size={20} weight="regular" />
+                    <CaretRight  size={20} weight="regular" />
                   </a>
                 </div>
                 <span className="louis-vuitton-credits-title">
@@ -330,7 +297,7 @@ const LouisVuitton = () => {
                     className="instagram-icon"
                     aria-label="Beya Bou-Harb Instagram"
                   >
-                    <InstagramLogo size={20} weight="regular" />
+                    <CaretRight  size={20} weight="regular" />
                   </a>
                 </div>
                 <span className="louis-vuitton-credits-title">
