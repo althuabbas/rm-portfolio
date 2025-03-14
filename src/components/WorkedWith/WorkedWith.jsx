@@ -12,6 +12,8 @@ import inFrame from "../../assets/images/inframe-dubai/1.jpeg";
 import bij from "../../assets/images/bijouq-italy/1.jpeg";
 import romaizan from "../../assets/images/al-romaizan/1.jpeg";
 import taali from "../../assets/images/taali/1.jpeg";
+import lcWaikiki from "../../assets/images/lcWaikiki/lcw1.jpeg";
+import layalaLenses from "../../assets/images/layalaLenses/ll1.jpeg";
 
 const WorkedWith = () => {
   const navigate = useNavigate();
@@ -33,6 +35,8 @@ const WorkedWith = () => {
     bij,
     romaizan,
     taali,
+    lcWaikiki,
+    layalaLenses,
   ];
 
   const menuItems = [
@@ -70,12 +74,22 @@ const WorkedWith = () => {
       info: "jewelry",
       name: "Riha Mehindi X al romaizan",
       tag: "Stylist",
-    }, 
+    },
     {
       info: "outfits",
       name: "Riha Mehindi X FP model agency",
       tag: "Creative Design",
-    },  
+    },
+    {
+      info: "outfits",
+      name: "Riha Mehindi X layala lenses",
+      tag: "Creative Design",
+    },
+    {
+      info: "outfits",
+      name: "Riha Mehindi X lc waikiki",
+      tag: "Creative Design",
+    },
   ];
 
   // Detect mobile devices and screen size changes

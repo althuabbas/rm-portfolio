@@ -13,6 +13,8 @@ import {
   soFearClock,
   sweetLady,
   taali,
+  layalaLenses,
+  lcWaikiki,
 } from "../../assets/client-images";
 
 // Import image data for different clients
@@ -53,6 +55,12 @@ const ClientDetails = () => {
         break;
       case "riha-mehindi-x-taali":
         setImages(taali);
+        break;
+      case "riha-mehindi-x-layala-lenses":
+        setImages(layalaLenses);
+        break;
+      case "riha-mehindi-x-lc-waikiki":
+        setImages(lcWaikiki);
         break;
       default:
         setImages([]); // Default to an empty array

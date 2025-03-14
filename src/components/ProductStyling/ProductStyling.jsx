@@ -1,7 +1,7 @@
 import "./ProductStyling.scss";
 
-import ps1 from '../../assets/images/mesarati/mesarati-1.jpg'
-import ps2 from '../../assets/images/mesarati/mesarati-2.jpg'
+import ps1 from '../../assets/images/mesarati/mesarati-1.webp'
+import ps2 from '../../assets/images/mesarati/mesarati-2.webp'
 
 const ProductStyling = () => {
   return (

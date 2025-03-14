@@ -15,13 +15,57 @@ import ProductStyling from "../../components/ProductStyling/ProductStyling";
 import CustomCursor from "../../components/InteractiveCursor/InteractiveCursor";
 
 // advance shoot
-import ad1 from "../../assets/images/advanced-shoot/as1.png";
-import ad2 from "../../assets/images/advanced-shoot/as2.png";
-import ad3 from "../../assets/images/advanced-shoot/as3.png";
+import ad1 from "../../assets/images/advanced-shoot/as1.webp";
+import ad2 from "../../assets/images/advanced-shoot/as2.webp";
+import ad3 from "../../assets/images/advanced-shoot/as3.webp";
 import LouisVuitton from "../../components/LouisVuitton/LouisVuitton";
+import VideoSlider from "../../components/VideoSlider/VideoSlider";
 
 const Home = () => {
   const lenisRef = useRef(null);
+
+  const videoData = [
+    {
+      id: 1,
+      src: "src/assets/videos/ss1.mp4",
+      thumbnail: "src/assets/thumbnail/ss-thumbnail-1.png",
+      title:
+        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show",
+      description:
+        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show ✨ Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan”",
+      profileImage: "src/assets/thumbnail/ssLogo.jpg",
+    },
+    {
+      id: 2,
+      src: "src/assets/videos/ss2.mp4",
+      thumbnail: "src/assets/thumbnail/ss-thumbnail-2.png",
+      title:
+        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show",
+      description:
+        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show ✨ Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan”",
+      profileImage: "src/assets/thumbnail/ssLogo.jpg",
+      },
+    {
+      id: 3,
+      src: "src/assets/videos/ss1.mp4",
+      thumbnail: "src/assets/thumbnail/ss-thumbnail-11.png",
+      title:
+        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show",
+      description:
+        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show ✨ Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan”",
+      profileImage: "src/assets/thumbnail/ssLogo.jpg",
+    },
+    {
+      id: 4,
+      src: "src/assets/videos/ss2.mp4",
+      thumbnail: "src/assets/thumbnail/ss-thumbnail-1.png",
+      title:
+        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show",
+      description:
+        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show ✨ Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan”",
+      profileImage: "src/assets/thumbnail/ssLogo.jpg",
+    },
+  ];
 
   // Initialize Lenis for smooth scrolling
   useEffect(() => {
@@ -276,6 +320,11 @@ const Home = () => {
             <img src={ad3} alt="" className="ad3" />
           </div>
         </div>
+      </section>
+
+      {/* sunsilk add */}
+      <section>
+        <VideoSlider videoData={videoData} />
       </section>
 
       <section className="worked_with_container">
