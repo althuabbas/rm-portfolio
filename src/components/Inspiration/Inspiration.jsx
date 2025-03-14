@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Inspiration.scss";
@@ -16,10 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Inspiration = () => {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
-  });
+  const revealContainersRef = useRef([]);
 
   // Add card to refs array
   const addToCardsRef = (el) => {
@@ -28,37 +25,21 @@ const Inspiration = () => {
     }
   };
 
-  // Handle window resize
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-    };
-
-    window.addEventListener('resize', handleResize);
-    
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  // Add reveal container to refs array
+  const addToRevealContainersRef = (el) => {
+    if (el && !revealContainersRef.current.includes(el)) {
+      revealContainersRef.current.push(el);
+    }
+  };
 
   useEffect(() => {
-    // Define rotations for cards - adjust for different screen sizes
-    const rotations = windowSize.width < 768 
-      ? [-8, 8, -3, 3, -3, -1] // Less rotation on smaller screens
-      : [-12, 10, -5, 5, -5, -2];
-
-    // Clear previous animations when window size changes
-    cardsRef.current.forEach((card) => {
-      gsap.killTweensOf(card);
-    });
+    // Define rotations for cards
+    const rotations = [-12, 10, -5, 5, -5, -2];
 
     // Set initial positions for cards
     cardsRef.current.forEach((card, index) => {
       gsap.set(card, {
-        y: windowSize.height,
+        y: window.innerHeight,
         rotate: rotations[index],
       });
     });
@@ -67,10 +48,10 @@ const Inspiration = () => {
     const cardsTrigger = ScrollTrigger.create({
       trigger: sectionRef.current,
       start: "top top",
-      end: `+=${windowSize.height * (windowSize.width < 768 ? 1.5 : 2)}px`, // Shorter scroll on mobile
+      end: `+=${window.innerHeight * 2}px`,
       pin: true,
       pinSpacing: true,
-      scrub: windowSize.width < 768 ? 0.5 : 1, // Faster scrub on mobile
+      scrub: 1,
       onUpdate: (self) => {
         const progress = self.progress;
         const totalCards = cardsRef.current.length;
@@ -81,7 +62,7 @@ const Inspiration = () => {
           let cardProgress = (progress - cardStart) / progressPerCard;
           cardProgress = Math.min(Math.max(cardProgress, 0), 1);
 
-          let yPos = windowSize.height * (1 - cardProgress);
+          let yPos = window.innerHeight * (1 - cardProgress);
           let xPos = 0;
 
           if (cardProgress === 1 && index < totalCards - 1) {
@@ -89,13 +70,17 @@ const Inspiration = () => {
               (progress - (cardStart + progressPerCard)) /
               (1 - (cardStart + progressPerCard));
             if (remainingProgress > 0) {
-              // Adjust movement based on screen size
-              const distanceMultiplier = 1 - index * (windowSize.width < 768 ? 0.1 : 0.15);
-              const xMultiplier = windowSize.width < 768 ? 0.2 : 0.3;
-              const yMultiplier = windowSize.width < 768 ? 0.2 : 0.3;
-              
-              xPos = -windowSize.width * xMultiplier * distanceMultiplier * remainingProgress;
-              yPos = -windowSize.height * yMultiplier * distanceMultiplier * remainingProgress;
+              const distanceMultiplier = 1 - index * 0.15;
+              xPos =
+                -window.innerWidth *
+                0.3 *
+                distanceMultiplier *
+                remainingProgress;
+              yPos =
+                -window.innerHeight *
+                0.3 *
+                distanceMultiplier *
+                remainingProgress;
             }
           }
 
@@ -109,6 +94,50 @@ const Inspiration = () => {
       },
     });
 
+    // Set up reveal animations
+    revealContainersRef.current.forEach((container) => {
+      const image = container.querySelector(".reveal__img");
+
+      gsap.set(container, {
+        autoAlpha: 1,
+        xPercent: -100,
+      });
+
+      gsap.set(image, {
+        xPercent: 100,
+        scale: 1.3,
+        visibility: "visible",
+      });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top center",
+          toggleActions: "restart none none reset",
+          onEnter: () => {
+            const tl = gsap.timeline();
+
+            tl.to(container, {
+              xPercent: 0,
+              duration: 1.5,
+              ease: "power2.out",
+            });
+
+            tl.to(
+              image,
+              {
+                xPercent: 0,
+                scale: 1,
+                duration: 1.5,
+                ease: "power2.out",
+              },
+              "-=1.5"
+            );
+          },
+        },
+      });
+    });
+
     // Lagsmoothing setting
     gsap.ticker.lagSmoothing(0);
 
@@ -117,7 +146,7 @@ const Inspiration = () => {
       cardsTrigger.kill();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [windowSize]); // Re-run when window size changes
+  }, []);
 
   // Create an array of imported images
   const insImages = [ins1, ins2, ins3, ins4, ins5, ins6];
@@ -160,7 +189,7 @@ const Inspiration = () => {
 
         <p className="about-description">
           My inspiration comes from the world around me—art, culture, and the
-          raw beauty of everyday life. I&apos;m drawn to the stories behind fashion,
+          raw beauty of everyday life. I'm drawn to the stories behind fashion,
           the way it can transform and empower. Iconic designers like Alexander
           McQueen and Iris Van Herpen have always sparked my creativity with
           their ability to merge artistry and innovation. But beyond the runway,

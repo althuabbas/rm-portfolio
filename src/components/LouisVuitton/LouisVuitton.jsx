@@ -189,8 +189,9 @@ const LouisVuitton = () => {
   }, []);
 
   return (
-    <div className="lv-container">
-      <h2 className="about-title louis-vuitton-title wrapper">
+    <div>
+        
+      <h2 className="about-title louis-vuitton-title">
         Louis Vuitton{"  "} X {"  "}
         <strong className="title-highlight">
           Villa88 Magazine

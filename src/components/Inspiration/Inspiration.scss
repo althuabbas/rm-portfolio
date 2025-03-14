@@ -6,7 +6,7 @@
     position: relative;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;    
+    overflow: hidden;
   }
 
   
@@ -22,48 +22,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
     will-change: transform;
-    width: 70%; // Default for mobile
-    height: 45%;
+    width: 25%;
+    height: 50%;
     padding: 0.5em;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
     background-color: #202020;
     color: #fff;
-    z-index: 100;
-    
-    @include bp.breakpoint('small') {
-      width: 60%;
-      height: 45%;
-    }
-    
-    @include bp.breakpoint('medium') {
-      // Tablet optimization
-      width: 45%;
-      height: 50%;
-      padding: 0.75em;
-      gap: 0.75em;
-    }
-    
-    @include bp.breakpoint('large') {
-      width: 35%;
-      height: 50%;
-    }
-    
-    @include bp.breakpoint('xlarge') {
-      width: 25%;
-      height: 50%;
-      padding: 1em;
-      gap: 1em;
-    }
-    
-    // Landscape orientation adjustments
-    @include bp.orientation('landscape') {
-      @include bp.breakpoint-down('medium') {
-        width: 40%;
-        height: 60%;
-      }
-    }
+    z-index: 10000;
   }
   
   .card-img {
@@ -71,35 +38,12 @@
     min-height: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    
-    img {
-      transition: transform 0.3s ease;
-      
-      &:hover {
-        transform: scale(1.05);
-      }
-    }
   }
   
   .card-content {
-    flex: 0 0 auto;
+    flex: 0 0 12px;
     display: flex;
     align-items: center;
-    padding: 0.25em 0;
-    
-    p {
-      margin: 0;
-      font-size: 0.75rem;
-      
-      @include bp.breakpoint('medium') {
-        font-size: 0.85rem;
-      }
-      
-      @include bp.breakpoint('large') {
-        font-size: 1rem;
-      }
-    }
   }
   
   .fashionInspiration_desc {
@@ -108,57 +52,17 @@
     max-width: 800px;
   }
   
-  .inspiration_info {
+  @media (max-width: 900px) {
+    .card {
+      width: 75%;
+    }
+  }
+  
+
+  .inspiration_info{
     max-width: 1400px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 80px 20px;
     overflow: hidden;
     position: relative;
-    z-index: 10;
-    
-    @include bp.breakpoint('medium') {
-      padding: 60px 40px;
-    }
-    
-    @include bp.breakpoint('large') {
-      padding: 80px 20px;
-    }
-    
-    .about-subtitle {
-      font-size: 0.85rem;
-      margin-bottom: 0.5rem;
-      
-      @include bp.breakpoint('medium') {
-        font-size: 1rem;
-      }
-    }
-    
-    .about-title {
-      font-size: 1.75rem;
-      margin-bottom: 1.5rem;
-      
-      @include bp.breakpoint('medium') {
-        font-size: 2.25rem;
-      }
-      
-      @include bp.breakpoint('large') {
-        font-size: 2.5rem;
-      }
-    }
-    
-    .about-description {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      max-width: 100%;
-      
-      @include bp.breakpoint('medium') {
-        font-size: 1rem;
-        max-width: 80%;
-      }
-      
-      @include bp.breakpoint('large') {
-        font-size: 1.1rem;
-        max-width: 70%;
-      }
-    }
   }

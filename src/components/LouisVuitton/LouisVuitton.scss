@@ -2,10 +2,6 @@
 @use "../../styles/utils/functions" as u;
 @use "../../styles/variables" as vars;
 
-.lv-container {
-  margin-top: 80px;
-}
-
 .louis-vuitton-background {
   width: 100%;
   background: linear-gradient(
@@ -14,7 +10,7 @@
     rgba(184, 134, 11, 0.15) 50%,
     rgba(218, 165, 32, 0.25) 100%
   );
-  padding: 2rem 0;  
+  padding: 2rem 0;
   position: relative;
   overflow: hidden;
 
@@ -281,7 +277,6 @@
 
 @media (max-width: 768px) {
   .louis-vuitton-title {
-    text-align: left;
     font-size: 2rem;
   }
 
@@ -326,7 +321,6 @@
 @media (max-width: 480px) {
   .louis-vuitton-title {
     font-size: 1.8rem;
-    text-align: left;
   }
 
   .louis-vuitton-grid {
