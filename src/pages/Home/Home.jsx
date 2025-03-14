@@ -21,49 +21,57 @@ import ad3 from "../../assets/images/advanced-shoot/as3.webp";
 import LouisVuitton from "../../components/LouisVuitton/LouisVuitton";
 import VideoSlider from "../../components/VideoSlider/VideoSlider";
 
+// Import video assets
+import video1 from "../../assets/videos/ss1.mp4";
+import video2 from "../../assets/videos/ss2.mp4";
+import thumbnail1 from "../../assets/thumbnail/ss-thumbnail-1.png";
+import thumbnail2 from "../../assets/thumbnail/ss-thumbnail-2.png";
+import thumbnail11 from "../../assets/thumbnail/ss-thumbnail-11.png";
+import ssLogo from "../../assets/thumbnail/ssLogo.jpg";
+
 const Home = () => {
   const lenisRef = useRef(null);
 
   const videoData = [
     {
       id: 1,
-      src: "src/assets/videos/ss1.mp4",
-      thumbnail: "src/assets/thumbnail/ss-thumbnail-1.png",
+      src: video1,
+      thumbnail: thumbnail1,
       title:
-        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show",
+        "Bringing beauty and style together for @sunsilk's tik tok Ramadan show",
       description:
-        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show ✨ Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan”",
-      profileImage: "src/assets/thumbnail/ssLogo.jpg",
+        "Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan",
+      profileImage: ssLogo,
     },
     {
       id: 2,
-      src: "src/assets/videos/ss2.mp4",
-      thumbnail: "src/assets/thumbnail/ss-thumbnail-2.png",
+      src: video2,
+      thumbnail: thumbnail2,
       title:
-        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show",
+        "Bringing beauty and style together for @sunsilk's tik tok Ramadan show",
       description:
-        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show ✨ Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan”",
-      profileImage: "src/assets/thumbnail/ssLogo.jpg",
-      },
+        "Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan",
+      profileImage: ssLogo,
+    },
     {
       id: 3,
-      src: "src/assets/videos/ss1.mp4",
-      thumbnail: "src/assets/thumbnail/ss-thumbnail-11.png",
+      src: video1,
+      thumbnail: thumbnail11,
       title:
-        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show",
+        "Bringing beauty and style together for @sunsilk's tik tok Ramadan show",
       description:
-        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show ✨ Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan”",
-      profileImage: "src/assets/thumbnail/ssLogo.jpg",
+        "Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan",
+      profileImage: ssLogo,
     },
     {
       id: 4,
-      src: "src/assets/videos/ss2.mp4",
-      thumbnail: "src/assets/thumbnail/ss-thumbnail-1.png",
+      src: video2,
+      thumbnail: thumbnail1,
       title:
-        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show",
+        "Bringing beauty and style together for @sunsilk's tik tok Ramadan show",
       description:
-        "Bringing beauty and style together for @sunsilk’s tik tok Ramadan show ✨ Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan”",
-      profileImage: "src/assets/thumbnail/ssLogo.jpg",
+        "Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan",
+      profileImage: ssLogo,
     },
   ];
 
