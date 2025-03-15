@@ -5,10 +5,10 @@ import SplitType from "split-type";
 import "./Hero.scss";
 
 // Import multiple images for the columns
-import hero1 from "../../assets/images/al-romaizan/1.jpeg";
+import hero1 from "../../assets/images/taali/4.jpeg";
 // You may need to replace these with actual images from your assets
-import hero2 from "../../assets/images/al-romaizan/2.jpeg";
-import hero3 from "../../assets/images/al-romaizan/7.jpeg";
+import hero2 from "../../assets/images/layalaLenses/ll3.jpeg";
+import hero3 from "../../assets/images/RmXFPmodelagency/11.jpeg";
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -72,6 +72,25 @@ ul {
   color: #666;  
 }
 
+.mood_board__list_title {
+  font-weight: 600;
+  font-family: "Bricolage Grotesque", serif;
+  
+  margin-left: 0.5rem;
+  margin-right: 10px;
+  color: vars.$gray;
+  
+
+  @include bp.breakpoint(medium) {
+    font-size: 1.1rem;
+  }
+
+  @include bp.breakpoint(large) {
+    font-size: 1.1rem;
+  }
+   
+}
+
 .mood_board_assist__spacing {
   padding-inline: 0.5rem;
 }

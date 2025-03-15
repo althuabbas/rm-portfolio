@@ -95,7 +95,8 @@ const WorkedWith = () => {
   // Detect mobile devices and screen size changes
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      const width = window.innerWidth;
+      setIsMobile(width <= 768);
     };
 
     // Initial check
@@ -190,6 +191,8 @@ const WorkedWith = () => {
 
   // Handle touch events for mobile
   const handleTouchStart = (index, e) => {
+    if (!isMobile) return; // Only handle touch on mobile
+    
     e.preventDefault();
 
     // Reset previous active item if exists
@@ -204,16 +207,9 @@ const WorkedWith = () => {
     if (activeIndex === index) {
       setActiveIndex(null);
       mouseOutAnimation(e.currentTarget);
-
-      gsap.to(".preview-img img", {
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-        duration: 1,
-        ease: "power3.out",
-      });
     } else {
       setActiveIndex(index);
       mouseOverAnimation(e.currentTarget);
-      appendImages(imageSources[index]);
     }
   };
 
@@ -313,11 +309,6 @@ const WorkedWith = () => {
             onMouseOver={(e) => handleMouseOver(index, e)}
             onMouseOut={handleMouseOut}
             onTouchStart={(e) => handleTouchStart(index, e)}
-            // onClick={() =>
-            //   (window.location.href = `/rm-portfolio#/client/${item.name
-            //     .toLowerCase()
-            //     .replace(/\s+/g, "-")}`)
-            // }
             onClick={() =>
               navigate(
                 `/client/${item.name.toLowerCase().replace(/\s+/g, "-")}`
@@ -335,6 +326,9 @@ const WorkedWith = () => {
             <div className="tag">
               <p>{item.tag}</p>
               <p>{item.tag}</p>
+            </div>
+            <div className="mobile-preview">
+              <img src={imageSources[index]} alt={item.name} />
             </div>
           </div>
         ))}

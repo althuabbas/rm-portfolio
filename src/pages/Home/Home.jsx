@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Hero from "../../components/Hero/Hero";
 import "./Home.scss";
 import { moodBoard, moodBoardAssist } from "../../assets/client-images";
@@ -213,7 +212,7 @@ const Home = () => {
       </section>
 
       {/* Louis Vuitton */}
-      <section>
+      <section style={{ marginTop: "0" }}>
         <LouisVuitton />
       </section>
 
@@ -228,21 +227,34 @@ const Home = () => {
 
       {/* Mood Board */}
       <section className="mood_board spacing">
-        <div className="mood_board__text_area wrapper">
-          {/* <h2 className="mood_board__header header_text">Editorial Styling</h2> */}
-          <h2 className="about-title">
-            Editorial{" "}
-            <strong className="title-highlight">
-              Styling
-              <span className="title-highlight-span"></span>
-            </strong>{" "}
-          </h2>
-          <div className="mood_board__info">
-            <ul className="mood_board__list">
-              <li>Creative director: Seher Khan</li>
-              <li>Photographer: Jef Anog</li>
-              <li>Riha Mehindi X Kristina Fidelskaya</li>
-            </ul>
+        <div className="wrapper">
+          <div className="about-subtitle">
+            Riha Mehindi X Kristina Fidelskaya
+          </div>
+          <div className="mood_board__text_area">
+            {/* <h2 className="mood_board__header header_text">Editorial Styling</h2> */}
+            <h2 className="about-title">
+              Editorial{" "}
+              <strong className="title-highlight">
+                Styling
+                <span className="title-highlight-span"></span>
+              </strong>{" "}
+            </h2>
+            <div className="mood_board__info">
+              <ul className="mood_board__list">
+                <li>
+                  Creative director:
+                  <span className="mood_board__list_title">
+                    {" "}
+                    Seher Khan
+                  </span>{" "}
+                </li>
+                <li>
+                  Photographer:
+                  <span className="mood_board__list_title">Jef Anog</span>{" "}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -259,21 +271,34 @@ const Home = () => {
           text="Hover To Hold"
         />
         <div className="mood_board_assist">
-          <div className="mood_board__text_area wrapper">
-            <h4 className="about-title">
-              fad talents With/{" "}
-              <strong className="title-highlight">
-                Designers & us
-                <span className="title-highlight-span"></span>
-              </strong>{" "}
-            </h4>
+          <div className="wrapper">
+            <div className="about-subtitle">Riha Mehindi X Designers & us</div>
+            <div className="mood_board__text_area">
+              <h4 className="about-title">
+                fad talents With/{" "}
+                <strong className="title-highlight">
+                  Designers & us
+                  <span className="title-highlight-span"></span>
+                </strong>{" "}
+              </h4>
 
-            <div className="mood_board__info">
-              <ul className="mood_board__list">
-                <li>Creative director: Seher Khan</li>
-                <li>Photographer: Jef Anog</li>
-                <li>Riha Mehindi X Designers & us</li>
-              </ul>
+              <div className="mood_board__info">
+                <ul className="mood_board__list">
+                  <li>
+                    Creative director:
+                    <span className="mood_board__list_title">
+                      {" "}
+                      Seher Khan
+                    </span>{" "}
+                  </li>
+                  <li>
+                    Photographer:
+                    <span className="mood_board__list_title">
+                      Jef Anog
+                    </span>{" "}
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -316,8 +341,16 @@ const Home = () => {
             </h2>
             <div className="mood_board__info">
               <ul className="mood_board__list">
-                <li>Creative Director: Jojo Dantespadua</li>
-                <li>Photographer: CS toledo</li>
+                <li>
+                  Creative Director:
+                  <span className="mood_board__list_title">
+                    Jojo Dantespadua
+                  </span>
+                </li>
+                <li>
+                  Photographer:
+                  <span className="mood_board__list_title">CS toledo</span>
+                </li>
               </ul>
             </div>
           </div>
@@ -335,7 +368,7 @@ const Home = () => {
         <VideoSlider videoData={videoData} />
       </section>
 
-      <section className="worked_with_container">
+      <section className="worked_with_container" style={{ marginTop: "0" }}>
         <WorkedWith />
       </section>
 

@@ -19,8 +19,14 @@ const ProductStyling = () => {
           </h2>
           <div className="mood_board__info">
             <ul className="mood_board__list">
-              <li>Creative Director: Kanwal Rauf</li>
-              <li>Photographer: Tejas Wighagada</li>
+              <li>
+                Creative Director:
+                <span className="mood_board__list_title">Kanwal Rauf</span>
+              </li>
+              <li>
+                Photographer:
+                <span className="mood_board__list_title">Tejas Wighagada</span>
+              </li>
             </ul>
           </div>
         </div>

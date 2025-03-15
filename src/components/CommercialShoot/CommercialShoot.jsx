@@ -26,9 +26,15 @@ const CommercialShoot = () => {
           </h2>
           <div className="mood_board__info">
             <ul className="mood_board__list">
-              <li>Commercial lookbook styling</li>
-              <li>Creative Director: katerina Nikolaeva</li>
-              <li>Photographer: Rita Tyrchyk</li>
+              {/* <li>Commercial lookbook styling</li> */}
+              <li>
+                Creative Director:
+                <span className="mood_board__list_title">katerina Nikolaeva</span>
+              </li>
+              <li>
+                Photographer:
+                <span className="mood_board__list_title">Rita Tyrchyk</span>
+              </li>
             </ul>
           </div>
         </div>
