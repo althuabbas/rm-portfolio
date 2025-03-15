@@ -3,7 +3,6 @@
 @use "../../styles/variables" as vars;
 
  
-
 .louis-vuitton-background {
   width: 100%;
   background: linear-gradient(
@@ -98,7 +97,6 @@
   position: relative;
   z-index: 2; /* Place content above the overlay */
 }
-
 
 .louis-vuitton-subtitle {
   font-size: 14px;
@@ -267,7 +265,7 @@
 
 .louis-vuitton-credits-title {
   text-transform: uppercase;
-  font-family: "Bricolage Grotesque";  
+  font-family: "Bricolage Grotesque";
   font-size: 0.7rem;
   color: vars.$off-light;
   // margin-top: 0.5rem;
@@ -297,7 +295,7 @@
   align-items: center;
   justify-content: center;
   color: rgba(244, 177, 8, 0.55);
-  transition: color 0.3s ease, transform 0.3s ease; 
+  transition: color 0.3s ease, transform 0.3s ease;
 
   &:hover {
     color: rgba(244, 177, 8, 0.85);

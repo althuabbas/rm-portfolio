@@ -212,7 +212,7 @@ const Home = () => {
       </section>
 
       {/* Louis Vuitton */}
-      <section style={{ marginTop: "0" }}>
+      <section>
         <LouisVuitton />
       </section>
 

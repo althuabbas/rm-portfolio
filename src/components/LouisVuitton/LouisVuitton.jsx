@@ -154,7 +154,7 @@ const LouisVuitton = () => {
   }, []);
 
   return (
-    <div>
+    <div className="louis-vuitton-wrapper">
       <div>
         <div className="louis-vuitton-subtitle">Ramadan Collection</div>
         <h2 className="about-title louis-vuitton-title">
