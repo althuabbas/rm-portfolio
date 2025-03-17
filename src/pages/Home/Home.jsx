@@ -28,6 +28,19 @@ import thumbnail2 from "../../assets/thumbnail/ss-thumbnail-2.png";
 import thumbnail11 from "../../assets/thumbnail/ss-thumbnail-11.png";
 import ssLogo from "../../assets/thumbnail/ssLogo.jpg";
 
+// taali video
+import taaliVideo1 from "../../assets/videos/taali/taali-v-1.mp4";
+import taaliVideo2 from "../../assets/videos/taali/taali-v-2.mp4";
+import taaliVideo3 from "../../assets/videos/taali/taali-v-3.mp4";
+import taaliVideo4 from "../../assets/videos/taali/taali-v-4.mp4";
+import taaliVideo5 from "../../assets/videos/taali/taali-v-5.mp4";
+import taaliVideo6 from "../../assets/videos/taali/taali-v-6.mp4";
+import taaliVideo7 from "../../assets/videos/taali/taali-v-7.mp4";
+import taaliVideo8 from "../../assets/videos/taali/taali-v-8.mp4";
+import IplAd from "../../components/IplAd/IplAd";
+
+// ipl ad
+
 const Home = () => {
   const lenisRef = useRef(null);
 
@@ -71,6 +84,57 @@ const Home = () => {
       description:
         "Honored to create looks that celebrate confidence, culture, and the essence of the season. #StyledByMe #SunsilkRamadan",
       profileImage: ssLogo,
+    },
+  ];
+
+  const taaliVideoData = [
+    {
+      id: 1,
+      src: taaliVideo1,
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCEkjP0gJ2KvcFaAESmU7EO9sTyNaVco8tTfRPntmzv8E1kjRvNTtBjMtWBL9h5edbmM&usqp=CAU",
+    },
+    {
+      id: 2,
+      src: taaliVideo2,
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCEkjP0gJ2KvcFaAESmU7EO9sTyNaVco8tTfRPntmzv8E1kjRvNTtBjMtWBL9h5edbmM&usqp=CAU",
+    },
+    {
+      id: 3,
+      src: taaliVideo3,
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCEkjP0gJ2KvcFaAESmU7EO9sTyNaVco8tTfRPntmzv8E1kjRvNTtBjMtWBL9h5edbmM&usqp=CAU",
+    },
+    {
+      id: 4,
+      src: taaliVideo4,
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCEkjP0gJ2KvcFaAESmU7EO9sTyNaVco8tTfRPntmzv8E1kjRvNTtBjMtWBL9h5edbmM&usqp=CAU",
+    },
+    {
+      id: 5,
+      src: taaliVideo5,
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCEkjP0gJ2KvcFaAESmU7EO9sTyNaVco8tTfRPntmzv8E1kjRvNTtBjMtWBL9h5edbmM&usqp=CAU",
+    },
+    {
+      id: 6,
+      src: taaliVideo6,
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCEkjP0gJ2KvcFaAESmU7EO9sTyNaVco8tTfRPntmzv8E1kjRvNTtBjMtWBL9h5edbmM&usqp=CAU",
+    },
+    {
+      id: 7,
+      src: taaliVideo7,
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCEkjP0gJ2KvcFaAESmU7EO9sTyNaVco8tTfRPntmzv8E1kjRvNTtBjMtWBL9h5edbmM&usqp=CAU",
+    },
+    {
+      id: 8,
+      src: taaliVideo8,
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCEkjP0gJ2KvcFaAESmU7EO9sTyNaVco8tTfRPntmzv8E1kjRvNTtBjMtWBL9h5edbmM&usqp=CAU",
     },
   ];
 
@@ -201,7 +265,7 @@ const Home = () => {
       <Link to="/client/sweet-lady">Go to sweet-lady's Details</Link> */}
 
       {/* Know about artist section */}
-      <section className="artist wrapper">
+      <section className="artist wrapper spacing">
         <Artist />
       </section>
 
@@ -212,7 +276,7 @@ const Home = () => {
       </section>
 
       {/* Louis Vuitton */}
-      <section>
+      <section className="lv-spacing">
         <LouisVuitton />
       </section>
 
@@ -227,12 +291,11 @@ const Home = () => {
 
       {/* Mood Board */}
       <section className="mood_board spacing">
-        <div className="wrapper">
+        {/* <div className="wrapper">
           <div className="about-subtitle">
             Riha Mehindi X Kristina Fidelskaya
           </div>
-          <div className="mood_board__text_area">
-            {/* <h2 className="mood_board__header header_text">Editorial Styling</h2> */}
+          <div className="mood_board__text_area">          
             <h2 className="about-title">
               Editorial{" "}
               <strong className="title-highlight">
@@ -256,12 +319,38 @@ const Home = () => {
               </ul>
             </div>
           </div>
+        </div> */}
+
+        <div>
+          <div className="louis-vuitton-subtitle">           
+            RM X Kristina Fidelskaya
+          </div>
+            <h2 className="about-title louis-vuitton-title">
+            Editorial{"  "}  {"  "}
+            <strong className="title-highlight">
+              Styling 
+              <span className="title-highlight-span"></span>
+            </strong>{" "}
+          </h2>
         </div>
 
         <div className="mood_board__grid_images">
           {moodBoard?.map((image, index) => (
             <img src={image?.value} alt="" key={index} />
           ))}
+        </div>
+
+        <div className="section__info wrapper">
+          <ul className="section__list">
+            <li>
+              Creative director:
+              <span className="section__list_title">Seher Khan</span>
+            </li>
+            <li>
+              Photographer:
+              <span className="section__list_title">Jef Anog</span>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -271,7 +360,7 @@ const Home = () => {
           text="Hover To Hold"
         />
         <div className="mood_board_assist">
-          <div className="wrapper">
+          {/* <div className="wrapper">
             <div className="about-subtitle">Riha Mehindi X Designers & us</div>
             <div className="mood_board__text_area">
               <h4 className="about-title">
@@ -300,6 +389,16 @@ const Home = () => {
                 </ul>
               </div>
             </div>
+          </div> */}
+          <div>
+            <div className="louis-vuitton-subtitle">Assist with</div>
+            <h2 className="about-title louis-vuitton-title">
+              fad talents With{"  "} X {"  "}
+              <strong className="title-highlight">
+                Designers & us
+                <span className="title-highlight-span"></span>
+              </strong>{" "}
+            </h2>
           </div>
 
           <div className="mood_board_assist__spacing">
@@ -323,15 +422,25 @@ const Home = () => {
               </div>
             </div>
           </div>
+
+          <div className="section__info wrapper">
+            <ul className="section__list">
+              <li>
+                Creative director:
+                <span className="section__list_title">Seher Khan</span>
+              </li>
+              <li>
+                Photographer:
+                <span className="section__list_title">Jef Anog</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
       <section className="spacing">
         <div className="advanced_shoot wrapper">
-          <div className="mood_board__text_area">
-            {/* <h2 className="advanced_shoot__header header_text">
-              Advanced Editorial Shoot
-            </h2> */}
+          {/* <div className="mood_board__text_area">           
             <h2 className="about-title">
               Advanced{" "}
               <strong className="title-highlight">
@@ -353,6 +462,17 @@ const Home = () => {
                 </li>
               </ul>
             </div>
+          </div> */}
+
+          <div>
+            <div className="louis-vuitton-subtitle">ipl promo shoot</div>
+            <h2 className="about-title louis-vuitton-title">
+              Advanced{"  "} X {"  "}
+              <strong className="title-highlight">
+                Editorial Shoot
+                <span className="title-highlight-span"></span>
+              </strong>{" "}
+            </h2>      
           </div>
 
           <div className="advanced_shoot__grid_images">
@@ -360,15 +480,38 @@ const Home = () => {
             <img src={ad2} alt="" className="ad2" />
             <img src={ad3} alt="" className="ad3" />
           </div>
+
+          <div className="section__info wrapper">
+            <ul className="section__list">
+              <li>
+                Creative director:
+                <span className="section__list_title">Jojo Dantespadua</span>
+              </li>
+              <li>
+                Photographer:
+                <span className="section__list_title">CS toledo</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* sunsilk add */}
-      <section>
-        <VideoSlider videoData={videoData} />
+      {/* ipl ad */}
+      <section className="spacing">
+        <IplAd />
       </section>
 
-      <section className="worked_with_container" style={{ marginTop: "0" }}>
+      {/* sunsilk add */}
+      <section className="spacing">
+        <VideoSlider videoData={videoData} subTitle="Sunsilk ramadan" firstTitle="rihamehindi" secondTitle="Sunsilk" />
+      </section>
+
+      {/* taali video */}
+      <section className="spacing">
+        <VideoSlider videoData={taaliVideoData} subTitle="taali / video" firstTitle="rihamehindi" secondTitle="taali" />
+      </section>
+
+      <section className="worked_with_container spacing" style={{ marginTop: "0" }}>
         <WorkedWith />
       </section>
 

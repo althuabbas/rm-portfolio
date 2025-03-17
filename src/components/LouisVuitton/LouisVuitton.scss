@@ -104,10 +104,18 @@
   text-transform: uppercase;
   letter-spacing: 3px;
   color: #888;
-  margin-bottom: 15px;
+  
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @include bp.breakpoint(medium) {
+    margin-bottom: 15px;
+  }
+  
+  @include bp.breakpoint(xlarge) {
+    margin-bottom: 15px;
+  }
 }
 
 .louis-vuitton-subtitle:before {
@@ -152,8 +160,10 @@
   grid-auto-rows: minmax(250px, auto);
   gap: 20px;
   grid-template-areas:
-    "img1 img2 img3"
-    "img1 img4 img5";
+    "img1 img1 img2"
+    "img1 img1 img3"
+    "img4 img5 img6"
+    "img7 img8 img9";
   margin-bottom: 3rem;
 }
 
@@ -187,6 +197,22 @@
 
   &:nth-child(5) {
     grid-area: img5;
+  }
+  
+  &:nth-child(6) {
+    grid-area: img6;
+  }
+  
+  &:nth-child(7) {
+    grid-area: img7;
+  }
+  
+  &:nth-child(8) {
+    grid-area: img8;
+  }
+  
+  &:nth-child(9) {
+    grid-area: img9;
   }
 
   img {
@@ -306,11 +332,12 @@
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .louis-vuitton-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-areas:
-      "img1 img2"
-      "img3 img4"
-      "img5 img5";
+      "img1 img1 img2"
+      "img1 img1 img3"
+      "img4 img5 img6"
+      "img7 img8 img9";
   }
 }
 
@@ -326,9 +353,11 @@
   .louis-vuitton-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
-      "img1 img2"
-      "img3 img4"
-      "img5 img5";
+      "img1 img1"
+      "img2 img3"
+      "img4 img5"
+      "img6 img7"
+      "img8 img9";
   }
 
   .louis-vuitton-credits {
@@ -369,7 +398,11 @@
       "img2"
       "img3"
       "img4"
-      "img5";
+      "img5"
+      "img6"
+      "img7"
+      "img8"
+      "img9";
   }
 
   .louis-vuitton-credits {

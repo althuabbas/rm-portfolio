@@ -4,17 +4,23 @@ import "./VideoSlider.scss";
 
 // Sample video data - replace with your actual data
 
-const VideoSlider = ({videoData}) => {
+const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [videoLoaded, setVideoLoaded] = useState(Array(videoData?.length || 0).fill(false));
-  const [expandedDescriptions, setExpandedDescriptions] = useState(Array(videoData?.length || 0).fill(false));
+  const [videoLoaded, setVideoLoaded] = useState(
+    Array(videoData?.length || 0).fill(false)
+  );
+  const [expandedDescriptions, setExpandedDescriptions] = useState(
+    Array(videoData?.length || 0).fill(false)
+  );
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [videoDurations, setVideoDurations] = useState(Array(videoData?.length || 0).fill(0));
+  const [videoDurations, setVideoDurations] = useState(
+    Array(videoData?.length || 0).fill(0)
+  );
   const videoRefs = useRef([]);
   const horizontalSliderRef = useRef(null);
 
@@ -36,18 +42,18 @@ const VideoSlider = ({videoData}) => {
   // Handle video progress and duration for mobile
   useEffect(() => {
     const currentVideo = videoRefs.current[currentIndex];
-    
+
     if (isMobile && isPlaying && currentVideo) {
       // Reset progress when changing videos
       setProgress(0);
-      
+
       const handleTimeUpdate = () => {
         const currentTime = currentVideo.currentTime;
         const duration = videoDurations[currentIndex];
         const progressPercentage = (currentTime / duration) * 100;
-        
+
         setProgress(progressPercentage);
-        
+
         // Move to next video when current one ends
         if (currentTime >= duration) {
           handleNext();
@@ -55,14 +61,21 @@ const VideoSlider = ({videoData}) => {
       };
 
       // Add timeupdate event listener
-      currentVideo.addEventListener('timeupdate', handleTimeUpdate);
-      
+      currentVideo.addEventListener("timeupdate", handleTimeUpdate);
+
       // Play the current video
-      currentVideo.play();
+      currentVideo.play().catch(e => {
+        console.log("Mobile play error:", e);
+        // Try playing again on user interaction
+        document.addEventListener('touchstart', function playOnTouch() {
+          currentVideo.play().catch(err => console.log("Touch play error:", err));
+          document.removeEventListener('touchstart', playOnTouch);
+        }, { once: true });
+      });
 
       return () => {
         if (currentVideo) {
-          currentVideo.removeEventListener('timeupdate', handleTimeUpdate);
+          currentVideo.removeEventListener("timeupdate", handleTimeUpdate);
         }
       };
     }
@@ -73,7 +86,7 @@ const VideoSlider = ({videoData}) => {
     const video = videoRefs.current[index];
     if (video) {
       const duration = video.duration;
-      setVideoDurations(prev => {
+      setVideoDurations((prev) => {
         const newDurations = [...prev];
         newDurations[index] = duration;
         return newDurations;
@@ -85,9 +98,11 @@ const VideoSlider = ({videoData}) => {
   useEffect(() => {
     videoRefs.current.forEach((videoRef, index) => {
       if (videoRef) {
-        if ((index === currentIndex && isPlaying) || 
-            (isDesktop && index === hoveredIndex)) {
-          videoRef.play().catch(e => console.log("Play error:", e));
+        if (
+          (index === currentIndex && isPlaying) ||
+          (isDesktop && index === hoveredIndex)
+        ) {
+          videoRef.play().catch((e) => console.log("Play error:", e));
         } else {
           videoRef.pause();
         }
@@ -104,25 +119,45 @@ const VideoSlider = ({videoData}) => {
     });
   }, [isMuted]);
 
-  // Update horizontal slider position
+  // Update horizontal slider position based on actual video count
   useEffect(() => {
-    if (isDesktop && horizontalSliderRef.current) {
-      const slideWidth = 100 / 4; // 4 videos per view
-      horizontalSliderRef.current.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+    if (isDesktop && horizontalSliderRef.current && videoData && videoData.length > 0) {
+      const totalItems = videoData.length;
+      
+      // Calculate slide width based on actual number of videos
+      let slideWidth;
+      if (totalItems >= 4) {
+        slideWidth = 100 / 4;
+      } else {
+        slideWidth = 100 / totalItems;
+      }
+      
+      // Calculate the transform value
+      let transformValue;
+      
+      // If we're at the end of the videos (for 4+ videos), loop back to start
+      if (totalItems > 4 && currentIndex >= totalItems - 3) {
+        // Start showing the first videos again as we approach the end
+        transformValue = (totalItems - 4) * slideWidth;
+      } else {
+        transformValue = currentIndex * slideWidth;
+      }
+      
+      horizontalSliderRef.current.style.transform = `translateX(-${transformValue}%)`;
     }
-  }, [currentIndex, isDesktop]);
+  }, [currentIndex, isDesktop, videoData]);
 
   const handlePrev = (e) => {
     if (e) e.stopPropagation();
     if (!videoData || videoData.length <= 1) return;
-    
+
     setCurrentIndex((prev) => (prev === 0 ? videoData.length - 1 : prev - 1));
   };
 
   const handleNext = (e) => {
     if (e) e.stopPropagation();
     if (!videoData || videoData.length <= 1) return;
-    
+
     setCurrentIndex((prev) => (prev === videoData.length - 1 ? 0 : prev + 1));
   };
 
@@ -179,21 +214,38 @@ const VideoSlider = ({videoData}) => {
   // Get visible indices for horizontal slider
   const getVisibleIndices = () => {
     if (!videoData || videoData.length === 0) return [];
-    
+
     const totalItems = videoData.length;
-    const visibleCount = Math.min(totalItems, 4); // Show 4 videos at a time
+    // Only show as many videos as are available, up to 4
+    const visibleCount = Math.min(totalItems, 4);
     const indices = [];
-    
+
+    // If we're near the end, start showing from the beginning again
+    let startIdx = currentIndex;
+    if (totalItems > 4 && currentIndex >= totalItems - 3) {
+      startIdx = totalItems - 4;
+    }
+
     for (let i = 0; i < visibleCount; i++) {
-      const index = (currentIndex + i) % totalItems;
+      let index = (startIdx + i) % totalItems;
       indices.push(index);
     }
-    
+
     return indices;
   };
 
   return (
     <div className="video-slider-container">
+      <div>
+        <div className="louis-vuitton-subtitle">{subTitle}</div>
+        <h2 className="about-title louis-vuitton-title">
+          {firstTitle}{"  "} X {"  "}
+          <strong className="title-highlight">
+            {secondTitle}
+            <span className="title-highlight-span"></span>
+          </strong>{" "}
+        </h2>
+      </div>
       {isMobile ? (
         // Mobile view - Instagram-like story slider
         <div className="mobile-slider">
@@ -228,11 +280,14 @@ const VideoSlider = ({videoData}) => {
                   index === currentIndex ? "active" : ""
                 }`}
               >
-                <div className="thumbnail-container" style={{ display: !videoLoaded[index] ? 'block' : 'none' }}>
-                  <img 
-                    src={video.thumbnail} 
-                    alt={`Thumbnail for ${video.title}`} 
-                    className="video-thumbnail" 
+                <div
+                  className="thumbnail-container"
+                  style={{ display: !videoLoaded[index] ? "block" : "none" }}
+                >
+                  <img
+                    src={video.thumbnail}
+                    alt={`Thumbnail for ${video.title}`}
+                    className="video-thumbnail"
                   />
                   <div className="play-icon">▶</div>
                 </div>
@@ -245,38 +300,41 @@ const VideoSlider = ({videoData}) => {
                   onClick={togglePlayPause}
                   onLoadedData={() => handleVideoLoad(index)}
                   onLoadedMetadata={() => handleLoadedMetadata(index)}
-                  style={{ display: videoLoaded[index] ? 'block' : 'none' }}
+                  onEnded={() => {
+                    // When a video ends in mobile view, go to the next one
+                    if (isMobile) handleNext();
+                  }}
+                  style={{ display: videoLoaded[index] ? "block" : "none" }}
                 />
                 <div className="video-info">
                   <div className="video-header">
                     <div className="profile-image">
-                      <img 
-                        src={video.profileImage || video.thumbnail} 
-                        alt="Profile" 
+                      <img
+                        src={video.profileImage || video.thumbnail}
+                        alt="Profile"
                       />
                     </div>
                     <h3 className="video-title">{video.title}</h3>
                   </div>
                   <div className="description-container">
                     <p>
-                      {expandedDescriptions[index] 
-                        ? video.description 
+                      {expandedDescriptions[index]
+                        ? video.description
                         : truncateDescription(video.description)}
                     </p>
                     {video.description && video.description.length > 60 && (
-                      <button 
-                        className="read-more-btn" 
+                      <button
+                        className="read-more-btn"
                         onClick={(e) => toggleDescription(index, e)}
                       >
-                        {expandedDescriptions[index] ? "Show less" : "Read more"}
+                        {expandedDescriptions[index]
+                          ? "Show less"
+                          : "Read more"}
                       </button>
                     )}
                   </div>
                 </div>
-                <button 
-                  className="mute-btn" 
-                  onClick={toggleMute}
-                >
+                <button className="mute-btn" onClick={toggleMute}>
                   {isMuted ? "🔇" : "🔊"}
                 </button>
               </div>
@@ -299,21 +357,157 @@ const VideoSlider = ({videoData}) => {
         // Desktop view - Horizontal slider with 4 videos
         <div className="horizontal-slider">
           <div 
-            className="slider-track" 
+            className={`slider-track ${
+              videoData && videoData.length > 0 
+                ? videoData.length === 1 
+                  ? 'videos-1' 
+                  : videoData.length === 2 
+                    ? 'videos-2' 
+                    : videoData.length === 3 
+                      ? 'videos-3' 
+                      : 'videos-4-plus'
+                : ''
+            }`} 
             ref={horizontalSliderRef}
           >
-            {videoData?.map((video, index) => (
-              <div 
-                key={video.id} 
-                className={`slider-item ${index === currentIndex ? 'active' : ''}`}
+            {videoData && videoData.length > 0 ? (
+              videoData.map((video, index) => (
+                <div
+                  key={video.id}
+                  className={`slider-item ${
+                    index === currentIndex ? "active" : ""
+                  }`}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <div
+                    className="thumbnail-container"
+                    style={{ display: !videoLoaded[index] ? "block" : "none" }}
+                  >
+                    {video.thumbnail && (
+                      <img
+                        src={video.thumbnail}
+                        alt={`Thumbnail for ${video.title}`}
+                        className="video-thumbnail"
+                      />
+                    )}
+                    <div className="play-icon">▶</div>
+                  </div>
+                  <video
+                    ref={(el) => (videoRefs.current[index] = el)}
+                    src={video.src}
+                    loop
+                    muted={isMuted}
+                    playsInline
+                    onLoadedData={() => handleVideoLoad(index)}
+                    onLoadedMetadata={() => handleLoadedMetadata(index)}
+                    style={{ display: videoLoaded[index] ? "block" : "none" }}
+                    onClick={() => {
+                      if (videoRefs.current[index].paused) {
+                        videoRefs.current[index].play();
+                      } else {
+                        videoRefs.current[index].pause();
+                      }
+                    }}
+                  />
+                  <div className="video-overlay"></div>
+                  <div className="video-info">
+                    <div className="video-header">
+                      <div className="profile-image">
+                        <img
+                          src={video.profileImage || video.thumbnail}
+                          alt="Profile"
+                        />
+                      </div>
+                      <h3 className="video-title">{video.title}</h3>
+                    </div>
+                    <div className="description-container">
+                      <p>
+                        {expandedDescriptions[index]
+                          ? video.description
+                          : truncateDescription(video.description, 100)}
+                      </p>
+                      {video.description && video.description.length > 100 && (
+                        <button
+                          className="read-more-btn"
+                          onClick={(e) => toggleDescription(index, e)}
+                          aria-label={
+                            expandedDescriptions[index]
+                              ? "Show less text"
+                              : "Show more text"
+                          }
+                        >
+                          {expandedDescriptions[index]
+                            ? "Show less"
+                            : "Read more"}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <button className="mute-btn" onClick={toggleMute}>
+                    {isMuted ? "🔇" : "🔊"}
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="no-videos-message">No videos available</div>
+            )}
+          </div>
+
+          {videoData && videoData.length > 0 && (
+            <>
+              {videoData.length > 4 && (
+                <div className="slider-nav">
+                  <button className="nav-btn prev" onClick={handlePrev}>
+                    <span>←</span>
+                  </button>
+                  <button className="nav-btn next" onClick={handleNext}>
+                    <span>→</span>
+                  </button>
+                </div>
+              )}
+
+              {/* <div className="slider-pagination">
+                {videoData.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`pagination-dot ${
+                      index === currentIndex ? "active" : ""
+                    }`}
+                    onClick={(e) => handleDotClick(index, e)}
+                  ></div>
+                ))}
+              </div> */}
+              
+              <div className="visible-indicator">
+                {getVisibleIndices().map((index) => (
+                  <span key={index} className="visible-item">
+                    {index + 1}
+                  </span>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      ) : (
+        // Tablet view - Dynamic grid
+        <div className="video-grid">
+          {videoData && videoData.length > 0 ? (
+            videoData.map((video, index) => (
+              <div
+                key={video.id}
+                className="grid-item"
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
-                <div className="thumbnail-container" style={{ display: !videoLoaded[index] ? 'block' : 'none' }}>
-                  <img 
-                    src={video.thumbnail} 
-                    alt={`Thumbnail for ${video.title}`} 
-                    className="video-thumbnail" 
+                <div
+                  className="thumbnail-container"
+                  style={{ display: !videoLoaded[index] ? "block" : "none" }}
+                >
+                  <img
+                    src={video.thumbnail}
+                    alt={`Thumbnail for ${video.title}`}
+                    className="video-thumbnail"
                   />
                   <div className="play-icon">▶</div>
                 </div>
@@ -325,7 +519,7 @@ const VideoSlider = ({videoData}) => {
                   playsInline
                   onLoadedData={() => handleVideoLoad(index)}
                   onLoadedMetadata={() => handleLoadedMetadata(index)}
-                  style={{ display: videoLoaded[index] ? 'block' : 'none' }}
+                  style={{ display: videoLoaded[index] ? "block" : "none" }}
                   onClick={() => {
                     if (videoRefs.current[index].paused) {
                       videoRefs.current[index].play();
@@ -334,138 +528,40 @@ const VideoSlider = ({videoData}) => {
                     }
                   }}
                 />
-                <div className="video-overlay"></div>
                 <div className="video-info">
                   <div className="video-header">
                     <div className="profile-image">
-                      <img 
-                        src={video.profileImage || video.thumbnail} 
-                        alt="Profile" 
+                      <img
+                        src={video.profileImage || video.thumbnail}
+                        alt="Profile"
                       />
                     </div>
                     <h3 className="video-title">{video.title}</h3>
                   </div>
                   <div className="description-container">
                     <p>
-                      {expandedDescriptions[index] 
-                        ? video.description 
-                        : truncateDescription(video.description, 100)}
+                      {expandedDescriptions[index]
+                        ? video.description
+                        : truncateDescription(video.description)}
                     </p>
-                    {video.description && video.description.length > 100 && (
-                      <button 
-                        className="read-more-btn" 
+                    {video.description && video.description.length > 60 && (
+                      <button
+                        className="read-more-btn"
                         onClick={(e) => toggleDescription(index, e)}
-                        aria-label={expandedDescriptions[index] ? "Show less text" : "Show more text"}
                       >
                         {expandedDescriptions[index] ? "Show less" : "Read more"}
                       </button>
                     )}
                   </div>
                 </div>
-                <button 
-                  className="mute-btn" 
-                  onClick={toggleMute}
-                >
+                <button className="mute-btn" onClick={toggleMute}>
                   {isMuted ? "🔇" : "🔊"}
                 </button>
               </div>
-            ))}
-          </div>
-          
-          <div className="slider-nav">
-            <button className="nav-btn prev" onClick={handlePrev}>
-              <span>←</span>
-            </button>
-            <button className="nav-btn next" onClick={handleNext}>
-              <span>→</span>
-            </button>
-          </div>
-          
-          <div className="slider-pagination">
-            {videoData?.map((_, index) => (
-              <div 
-                key={index} 
-                className={`pagination-dot ${index === currentIndex ? 'active' : ''}`}
-                onClick={(e) => handleDotClick(index, e)}
-              ></div>
-            ))}
-          </div>
-          
-          <div className="visible-indicator">
-            {getVisibleIndices().map((index) => (
-              <span key={index} className="visible-item">{index + 1}</span>
-            ))}
-          </div>
-        </div>
-      ) : (
-        // Tablet view - Dynamic grid
-        <div className="video-grid">
-          {videoData?.map((video, index) => (
-            <div 
-              key={video.id} 
-              className="grid-item"
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <div className="thumbnail-container" style={{ display: !videoLoaded[index] ? 'block' : 'none' }}>
-                <img 
-                  src={video.thumbnail} 
-                  alt={`Thumbnail for ${video.title}`} 
-                  className="video-thumbnail" 
-                />
-                <div className="play-icon">▶</div>
-              </div>
-              <video
-                ref={(el) => (videoRefs.current[index] = el)}
-                src={video.src}
-                loop
-                muted={isMuted}
-                playsInline
-                onLoadedData={() => handleVideoLoad(index)}
-                onLoadedMetadata={() => handleLoadedMetadata(index)}
-                style={{ display: videoLoaded[index] ? 'block' : 'none' }}
-                onClick={() => {
-                  if (videoRefs.current[index].paused) {
-                    videoRefs.current[index].play();
-                  } else {
-                    videoRefs.current[index].pause();
-                  }
-                }}
-              />
-              <div className="video-info">
-                <div className="video-header">
-                  <div className="profile-image">
-                    <img 
-                      src={video.profileImage || video.thumbnail} 
-                      alt="Profile" 
-                    />
-                  </div>
-                  <h3 className="video-title">{video.title}</h3>
-                </div>
-                <div className="description-container">
-                  <p>
-                    {expandedDescriptions[index] 
-                      ? video.description 
-                      : truncateDescription(video.description)}
-                  </p>
-                  {video.description && video.description.length > 60 && (
-                    <button 
-                      className="read-more-btn" 
-                      onClick={(e) => toggleDescription(index, e)}
-                    >
-                      {expandedDescriptions[index] ? "Show less" : "Read more"}
-                    </button>
-                  )}
-                </div>
-              </div>
-              <button 
-                className="mute-btn" 
-                onClick={toggleMute}
-              >
-                {isMuted ? "🔇" : "🔊"}
-              </button>
-            </div>
-          ))}
+            ))
+          ) : (
+            <div className="no-videos-message">No videos available</div>
+          )}
         </div>
       )}
     </div>
@@ -480,14 +576,20 @@ VideoSlider.propTypes = {
       thumbnail: PropTypes.string.isRequired,
       profileImage: PropTypes.string,
       title: PropTypes.string.isRequired,
-      description: PropTypes.string
+      description: PropTypes.string,
     })
-  ).isRequired
+  ).isRequired,
+  subTitle: PropTypes.string,
+  firstTitle: PropTypes.string,
+  secondTitle: PropTypes.string
 };
 
 // Default props
 VideoSlider.defaultProps = {
-  videoData: []
+  videoData: [],
+  subTitle: '',
+  firstTitle: '',
+  secondTitle: ''
 };
 
 export default VideoSlider;

@@ -41,18 +41,6 @@
   }
 }
 
-ul {
-  @include bp.breakpoint(large) {
-    display: flex;
-    gap: 30px;
-
-    li {
-      font-family: "Bricolage Grotesque";
-      list-style: symbols("/");
-    }
-  }
-}
-
 .mood_board_assist__header {
   text-transform: uppercase;
   text-align: center;
@@ -69,17 +57,16 @@ ul {
 }
 
 .mood_board_assist__title {
-  color: #666;  
+  color: #666;
 }
 
 .mood_board__list_title {
   font-weight: 600;
   font-family: "Bricolage Grotesque", serif;
-  
+
   margin-left: 0.5rem;
   margin-right: 10px;
   color: vars.$gray;
-  
 
   @include bp.breakpoint(medium) {
     font-size: 1.1rem;
@@ -88,7 +75,6 @@ ul {
   @include bp.breakpoint(large) {
     font-size: 1.1rem;
   }
-   
 }
 
 .mood_board_assist__spacing {
@@ -99,7 +85,7 @@ ul {
 .mood_board_assist__grid_images {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(3, 1fr);  
+  grid-template-columns: repeat(3, 1fr);
 }
 
 /* New styles for horizontal scrolling */
@@ -135,26 +121,11 @@ ul {
   // transform: scale(1.05);
 }
 
-.title-highlight {
-  position: relative;
-  font-weight: inherit;
-}
-
-.title-highlight-span {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
 .advanced_shoot {
   &__header {
     text-align: center;
     line-height: 120%;
     margin-bottom: 1.2rem;
-    
   }
   &__grid_images {
     display: grid;
@@ -210,4 +181,45 @@ ul {
 
 .worked_with_container {
   padding-top: 50px;
+}
+
+
+.section__info {
+  color: vars.$gray;
+  display: flex;
+  justify-content: flex-end;
+  margin-block: 1.5rem;
+}
+
+.section__list {
+  list-style: symbols("/");
+}
+
+.section__list_title {
+  font-weight: 600;
+  font-family: "Bricolage Grotesque", serif;
+
+  margin-left: 0.5rem;
+  margin-right: 10px;
+  color: vars.$gray;
+
+  @include bp.breakpoint(medium) {
+    font-size: 1.1rem;
+  }
+
+  @include bp.breakpoint(large) {
+    font-size: 1.1rem;
+  }
+}
+
+ul {
+  @include bp.breakpoint(large) {
+    display: flex;
+    gap: 30px;
+
+    li {
+      font-family: "Bricolage Grotesque";
+      text-transform: uppercase;
+    }
+  }
 }

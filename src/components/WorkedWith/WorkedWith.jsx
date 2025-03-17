@@ -27,16 +27,16 @@ const WorkedWith = () => {
 
   // Image sources
   const imageSources = [
-    rmXfp,
+    taali,
     sweet,
     soFear,
     bridel,
     inFrame,
     bij,
     romaizan,
-    taali,
-    lcWaikiki,
+    rmXfp,
     layalaLenses,
+    lcWaikiki,
   ];
 
   const menuItems = [

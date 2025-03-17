@@ -10,7 +10,6 @@ import assist2 from "../assets/images/assist/assist-2.webp";
 import assist3 from "../assets/images/assist/assist-3.webp";
 import assist4 from "../assets/images/assist/assist-4.webp";
 import assist5 from "../assets/images/assist/assist-5.webp";
-import assist6 from "../assets/images/assist/assist-6.webp";
 import assist7 from "../assets/images/assist/assist-7.webp";
 import assist8 from "../assets/images/assist/assist-8.webp";
 import assist9 from "../assets/images/assist/assist-9.webp";
@@ -218,8 +217,7 @@ export const moodBoardAssist = [
   { label: "", value: assist2 },
   { label: "", value: assist3 },
   { label: "", value: assist4 },
-  { label: "", value: assist5 },
-  { label: "", value: assist6 },
+  { label: "", value: assist5 },  
   { label: "", value: assist7 },
   { label: "", value: assist8 },
   { label: "", value: assist9 },

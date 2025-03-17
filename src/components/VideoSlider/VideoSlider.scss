@@ -156,13 +156,14 @@
             margin-bottom: 10px;
 
             .profile-image {
-              width: 100px;
-              height: 60px;
+              width: 40px;
+              height: 40px;
               border-radius: 50%;
               overflow: hidden;
               object-fit: contain;
               margin-right: 10px;
               border: 2px solid white;
+              flex-shrink: 0;
 
               img {
                 width: 100%;
@@ -261,6 +262,16 @@
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 12px;
+
+    .no-videos-message {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px;
+      font-size: 18px;
+      color: #666;
+      background-color: rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+    }
 
     .grid-item {
       position: relative;
@@ -436,6 +447,22 @@
     padding: 30px 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     
+    .no-videos-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 30px;
+      font-size: 20px;
+      color: #666;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 400px;
+    }
+    
     .slider-track {
       display: flex;
       width: 100%;
@@ -443,10 +470,39 @@
       transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
       gap: 20px;
       padding: 0 20px;
+      
+      // Adjust for different number of videos
+      &.videos-1 {
+        justify-content: center;
+        
+        .slider-item {
+          flex: 0 0 50%;
+          max-width: 500px;
+        }
+      }
+      
+      &.videos-2 {
+        justify-content: center;
+        
+        .slider-item {
+          flex: 0 0 calc(40% - 10px);
+        }
+      }
+      
+      &.videos-3 {
+        justify-content: center;
+        
+        .slider-item {
+          flex: 0 0 calc(33.333% - 13.333px);
+        }
+      }
+      
+      &.videos-4-plus .slider-item {
+        flex: 0 0 calc(25% - 15px);
+      }
     }
     
     .slider-item {
-      flex: 0 0 calc(25% - 15px);
       height: 100%;
       position: relative;
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -704,7 +760,7 @@
       z-index: 10;
       
       .pagination-dot {
-        display: none;
+        display: block;
         width: 10px;
         height: 10px;
         border-radius: 50%;
@@ -838,7 +894,7 @@
 @media (min-width: 1600px) {
   .video-slider-container {
     max-width: 1800px;
-    padding: 50px 30px;
+    padding: 0px 30px;
     
     .horizontal-slider {
       .slider-track {

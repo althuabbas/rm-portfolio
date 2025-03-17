@@ -1,5 +1,7 @@
 import "./LouisVuitton.scss";
 import { useEffect, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Import images
 import lv1 from "../../assets/images/LV/lv-1.jpeg";
@@ -7,12 +9,52 @@ import lv2 from "../../assets/images/LV/lv-2.jpeg";
 import lv3 from "../../assets/images/LV/lv-3.jpeg";
 import lv4 from "../../assets/images/LV/lv-4.jpeg";
 import lv5 from "../../assets/images/LV/lv-5.jpeg";
+import lv6 from "../../assets/images/LV/lv-6.jpeg";
+import lv7 from "../../assets/images/LV/lv-7.jpeg";
+import lv8 from "../../assets/images/LV/lv-8.jpeg";
+import lv9 from "../../assets/images/LV/lv-9.jpeg";
 import lvLogo from "../../assets/images/LV/lv-logo.png";
 import villa88Logo from "../../assets/images/LV/Villa88-Logo-gold.png";
-import { CaretRight, InstagramLogo } from "@phosphor-icons/react";
+import { CaretRight } from "@phosphor-icons/react";
 
 const LouisVuitton = () => {
   const [logos, setLogos] = useState([]);
+
+  useEffect(() => {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initialize scroll animations for grid items
+    const gridItems = document.querySelectorAll('.grid-item');
+    
+    gridItems.forEach((item, index) => {
+      // Set initial state
+      gsap.set(item, {
+        opacity: 0,
+        y: 50,
+      });
+
+      // Create scroll-triggered animation
+      gsap.to(item, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top bottom-=100",
+          end: "bottom center",
+          toggleActions: "play none none reverse",
+        },
+        delay: index * 0.2, // Stagger the animations
+      });
+    });
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
   useEffect(() => {
     // Generate logo elements with a precise arranged pattern
@@ -184,14 +226,6 @@ const LouisVuitton = () => {
         </div>
 
         <div className="louis-vuitton-container">
-          {/* <h2 className="about-title louis-vuitton-title">
-          Louis Vuitton{"  "} X {"  "}
-          <strong className="title-highlight">
-            Villa88 Magazine
-            <span className="title-highlight-span"></span>
-          </strong>{" "}
-        </h2> */}
-
           <div className="louis-vuitton-grid">
             <div className="grid-item">
               <img src={lv1} alt="Louis Vuitton" />
@@ -207,6 +241,18 @@ const LouisVuitton = () => {
             </div>
             <div className="grid-item">
               <img src={lv5} alt="Louis Vuitton" />
+            </div>
+            <div className="grid-item">
+              <img src={lv6} alt="Louis Vuitton" />
+            </div>
+            <div className="grid-item">
+              <img src={lv7} alt="Louis Vuitton" />
+            </div>
+            <div className="grid-item">
+              <img src={lv8} alt="Louis Vuitton" />
+            </div>
+            <div className="grid-item">
+              <img src={lv9} alt="Louis Vuitton" />
             </div>
           </div>
 
