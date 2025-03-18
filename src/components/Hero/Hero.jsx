@@ -19,12 +19,12 @@ const Hero = () => {
     // Split text for animation
     const titleText = new SplitType(".hero__title", {
       types: "chars",
-      tagName: "span"
+      tagName: "span",
     });
 
     // Initialize main timeline
     const tl = gsap.timeline({
-      defaults: { ease: "power2.out" }
+      defaults: { ease: "power2.out" },
     });
 
     // Initial setup
@@ -35,54 +35,81 @@ const Hero = () => {
     // Main animation sequence
     tl.to(".hero__background-overlay", {
       opacity: 0.5,
-      duration: 1.6
+      duration: 1.6,
     })
-    .to(".hero__column", {
-      opacity: 1,
-      duration: 1,
-      stagger: 0.2
-    }, "-=1.2")
-    .to(".hero__content", {
-      opacity: 1,
-      duration: 1
-    }, "-=0.8")
-    .fromTo(titleText.chars, {
-      y: 100,
-      opacity: 0,
-      rotateX: -90
-    }, {
-      y: 0,
-      opacity: 1,
-      rotateX: 0,
-      duration: 1,
-      // stagger: 0.02
-    }, "-=0.5")
-    .fromTo(".hero__subtitle", {
-      y: 20,
-      opacity: 0
-    }, {
-      y: 0,
-      opacity: 1,
-      duration: 1
-    }, "-=0.8")
-    .fromTo(".hero__tag", {
-      x: -30,
-      opacity: 0
-    }, {
-      x: 0,
-      opacity: 1,
-      duration: 0.8,
-      stagger: 0.1
-    }, "-=0.8")
-    .fromTo(".hero__scroll-indicator", {
-      opacity: 0,
-      y: 20,
-      
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 1
-    }, "-=0.5");
+      .to(
+        ".hero__column",
+        {
+          opacity: 1,
+          duration: 1,
+          stagger: 0.2,
+        },
+        "-=1.2"
+      )
+      .to(
+        ".hero__content",
+        {
+          opacity: 1,
+          duration: 1,
+        },
+        "-=0.8"
+      )
+      .fromTo(
+        titleText.chars,
+        {
+          y: 100,
+          opacity: 0,
+          rotateX: -90,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 1,
+          // stagger: 0.02
+        },
+        "-=0.5"
+      )
+      .fromTo(
+        ".hero__subtitle",
+        {
+          y: 20,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+        },
+        "-=0.8"
+      )
+      .fromTo(
+        ".hero__tag",
+        {
+          x: -30,
+          opacity: 0,
+        },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.1,
+        },
+        "-=0.8"
+      )
+      .fromTo(
+        ".hero__scroll-indicator",
+        {
+          opacity: 0,
+          y: 20,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+        },
+        "-=0.5"
+      );
 
     // Scroll animation for background columns
     gsap.to(".hero__background-columns", {
@@ -92,12 +119,12 @@ const Hero = () => {
         trigger: ".hero",
         start: "top top",
         end: "bottom top",
-        scrub: true
-      }
+        scrub: true,
+      },
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -108,20 +135,34 @@ const Hero = () => {
           <div className="hero__background-overlay"></div>
           <div className="hero__background-columns">
             <div className="hero__column">
-              <img src={hero1} alt="Background 1" className="hero__column-image" />
+              <img
+                src={hero1}
+                alt="Background 1"
+                className="hero__column-image"
+              />
             </div>
             <div className="hero__column">
-              <img src={hero2} alt="Background 2" className="hero__column-image" />
+              <img
+                src={hero2}
+                alt="Background 2"
+                className="hero__column-image"
+              />
             </div>
             <div className="hero__column">
-              <img src={hero3} alt="Background 3" className="hero__column-image" />
+              <img
+                src={hero3}
+                alt="Background 3"
+                className="hero__column-image"
+              />
             </div>
           </div>
         </div>
 
         <div className="hero__content">
           <div className="hero__text">
-            <h1 className="hero__title">RIHA MEHINDI</h1>
+            <h1 className="hero__title">
+              <span className="hero__title-part">RIHA</span> MEHINDI.
+            </h1>
             <h2 className="hero__subtitle">Fashion Stylist | مصمم أزياء</h2>
             <div className="hero__tags">
               <span className="hero__tag">Based in UAE, Dubai</span>

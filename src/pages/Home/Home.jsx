@@ -482,7 +482,7 @@ const Home = () => {
           </div>
 
           <div className="section__info wrapper">
-            <ul className="section__list">
+            <ul className="section__list" style={{display: "flex", flexDirection: "column", gap: "1px"}}>
               <li>
                 Creative director:
                 <span className="section__list_title">Jojo Dantespadua</span>
@@ -507,7 +507,7 @@ const Home = () => {
       </section>
 
       {/* taali video */}
-      <section className="wrapper">
+      <section className="spacing wrapper">
         <VideoSlider videoData={taaliVideoData} subTitle="taali / video" firstTitle="rihamehindi" secondTitle="taali" />
       </section>
 

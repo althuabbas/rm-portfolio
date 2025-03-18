@@ -177,13 +177,17 @@
       display: inline-block;
       transform-origin: bottom;
     }
+
+    &-part{
+      font-weight: 400;      
+    }
   }
 
   &__subtitle {
     font-family: "Bodoni Moda", serif;
     font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 400;
-    font-style: italic;
+  
     color: vars.$light;
     margin-bottom: 2rem;
     opacity: 0.9;
@@ -209,8 +213,7 @@
     color: vars.$light;
     text-transform: uppercase;
     letter-spacing: 0.1em;    
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    
     border: 0.5px solid rgba(255, 255, 255, 0.2);
     border-radius: 0;
     transition: all 0.3s ease;

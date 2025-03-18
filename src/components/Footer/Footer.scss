@@ -1,4 +1,8 @@
 /* Minimalist Dark Footer Styles */
+@use "../../styles/utils/breakepoints" as bp;
+@use "../../styles/utils/functions" as u;
+@use "../../styles/variables" as vars;
+
 
 .minimalist-footer {
     background-color: #000000;
@@ -85,7 +89,7 @@
   
   .footer-nav ul li a:hover,
   .footer-socials ul li a:hover {
-    color: #45D62E; /* Same green as the submit button */
+    color: vars.$off-light; /* Same green as the submit button */
   }
   
   .count {
@@ -131,7 +135,7 @@
   }
   
   .newsletter-button {
-    background-color: #45D62E;
+    background-color: vars.$off-light;;
     color: #000000;
     border: none;
     padding: 0.5rem 1.5rem;
@@ -193,6 +197,11 @@
   .footer-bottom-links {
     display: flex;
     gap: 2rem;
+
+    a{
+      text-transform: uppercase; 
+      color: #349467 !important;    
+    }
   }
   
   .footer-bottom a {
@@ -212,7 +221,8 @@
     }
     
     .footer-bottom-links {
+      text-transform: uppercase;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.5rem;     
     }
   }

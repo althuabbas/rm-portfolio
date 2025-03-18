@@ -4,6 +4,8 @@
   padding: 20px 0;
   overflow: hidden;
   font-family: "Roboto", sans-serif;
+  -webkit-overflow-scrolling: touch; /* For smoother scroll on iOS */
+  overscroll-behavior: none; /* Prevent accidental page refreshes */
 
   // Mobile styles (Instagram-like story slider)
   .mobile-slider {
@@ -441,11 +443,12 @@
     position: relative;
     width: 100%;
     height: 80vh;
-    // background-color: #f8f9fa;
     border-radius: 16px;
     overflow: hidden;
     padding: 30px 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    will-change: transform; /* Performance optimization */
+    backface-visibility: hidden; /* Performance optimization */
     
     .no-videos-message {
       position: absolute;
@@ -470,6 +473,7 @@
       transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
       gap: 20px;
       padding: 0 20px;
+      will-change: transform; /* Performance optimization */
       
       // Adjust for different number of videos
       &.videos-1 {
@@ -507,6 +511,7 @@
       position: relative;
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       background-color: transparent;
+      will-change: transform, opacity; /* Performance optimization */
       
       &.active {
         transform: scale(1.02);
@@ -821,7 +826,8 @@
 // Media queries for responsive design
 @media (min-width: 768px) and (max-width: 1199px) {
   .video-slider-container {
-    padding: 30px 20px;
+    padding: 30px 15px;
+    overscroll-behavior-y: contain; /* Prevent accidental refreshes */
 
     .video-grid {
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -830,30 +836,106 @@
     }
 
     .horizontal-slider {
+      height: 65vh;
+      overscroll-behavior: none;
+      touch-action: pan-y; /* Allow vertical scrolling but optimize for horizontal swipes */
+      
       .slider-track {
         gap: 15px;
         padding: 0 15px;
+        
+        &.videos-1 .slider-item {
+          flex: 0 0 70%;
+          max-width: 500px;
+        }
+        
+        &.videos-2 .slider-item {
+          flex: 0 0 calc(45% - 7.5px);
+        }
+        
+        &.videos-3 .slider-item {
+          flex: 0 0 calc(33.333% - 10px);
+        }
+        
+        &.videos-4-plus .slider-item {
+          flex: 0 0 calc(30% - 10.5px);
+        }
       }
       
       .slider-item {
-        flex: 0 0 calc(25% - 11.25px);
+        border-radius: 12px;
+        
+        .thumbnail-container {
+          border-radius: 12px;
+        }
+        
+        video {
+          border-radius: 12px;
+        }
         
         .video-info {
           padding: 15px;
           
-          .video-title {
-            font-size: 14px;
+          .video-header {
+            .profile-image {
+              width: 36px;
+              height: 36px;
+            }
+            
+            .video-title {
+              font-size: 15px;
+            }
           }
           
-          .description-container p {
-            font-size: 13px;
+          .description-container {
+            p {
+              font-size: 13px;
+              -webkit-line-clamp: 2;
+            }
+            
+            .read-more-btn {
+              font-size: 12px;
+            }
           }
         }
         
         .mute-btn {
-          width: 36px;
-          height: 36px;
+          width: 34px;
+          height: 34px;
           font-size: 16px;
+          top: 10px;
+          right: 10px;
+        }
+      }
+      
+      .slider-nav {
+        padding: 0 20px;
+        
+        .nav-btn {
+          width: 50px;
+          height: 50px;
+          background-color: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          touch-action: manipulation; /* Improves touch responsiveness */
+          -webkit-tap-highlight-color: transparent; /* Removes tap highlight on iOS */
+          
+          &:active {
+            transform: scale(0.95);
+            background-color: rgba(255, 255, 255, 1);
+          }
+          
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+      
+      .slider-pagination {
+        bottom: 20px;
+        
+        .pagination-dot {
+          width: 8px;
+          height: 8px;
         }
       }
     }
@@ -920,6 +1002,83 @@
         .mute-btn {
           width: 45px;
           height: 45px;
+        }
+      }
+    }
+  }
+}
+
+// Add specific styles for smaller tablets
+@media (min-width: 768px) and (max-width: 900px) {
+  .video-slider-container {
+    .horizontal-slider {
+      height: 60vh;
+      
+      .slider-track {
+        &.videos-1 .slider-item {
+          flex: 0 0 80%;
+        }
+        
+        &.videos-2 .slider-item {
+          flex: 0 0 calc(50% - 7.5px);
+        }
+        
+        &.videos-3 .slider-item,
+        &.videos-4-plus .slider-item {
+          flex: 0 0 calc(40% - 9px);
+        }
+      }
+      
+      .slider-nav {
+        .nav-btn {
+          width: 45px;
+          height: 45px;
+        }
+      }
+    }
+  }
+}
+
+// Add portrait orientation optimization for tablets
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .video-slider-container {
+    .horizontal-slider {
+      height: 50vh;
+      
+      .slider-track {
+        &.videos-1 .slider-item {
+          flex: 0 0 85%;
+        }
+        
+        &.videos-2 .slider-item {
+          flex: 0 0 calc(70% - 7.5px);
+        }
+        
+        &.videos-3 .slider-item,
+        &.videos-4-plus .slider-item {
+          flex: 0 0 calc(50% - 7.5px);
+        }
+      }
+    }
+  }
+}
+
+// Enhance mobile navigation controls
+@media (max-width: 767px) {
+  .video-slider-container {
+    .mobile-slider {
+      .navigation-controls {
+        .nav-btn {
+          width: 45px; 
+          height: 45px;
+          background: rgba(0, 0, 0, 0.4);
+          touch-action: manipulation;
+          -webkit-tap-highlight-color: transparent;
+          
+          &:active {
+            background: rgba(0, 0, 0, 0.6);
+            transform: scale(0.95);
+          }
         }
       }
     }

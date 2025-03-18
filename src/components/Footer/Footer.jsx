@@ -10,14 +10,14 @@ const Footer = () => {
           <div className="footer-column">
             <div className="email-section">
               <p className="email-label">// SHOOT US AN EMAIL</p>
-              <a href="mailto:hello@rihamehindi.com" className="email-link">
-                hello@rihamehindi.com
+              <a href="mailto:rihamehindion@gmail.com" className="email-link">
+                rihamehindion@gmail.com
               </a>
             </div>
           </div>
 
           {/* Middle column - Navigation */}
-          <div className="footer-column">
+          {/* <div className="footer-column">
             <p className="section-label">• NAVIGATION</p>
             <nav className="footer-nav">
               <ul>
@@ -40,26 +40,42 @@ const Footer = () => {
                 </li>
               </ul>
             </nav>
-          </div>
+          </div> */}
 
           {/* Right column - Socials */}
           <div className="footer-column">
             <p className="section-label">• SOCIALS</p>
             <nav className="footer-socials">
               <ul>
-                <li>
+                {/* <li>
                   <a href="#">Twitter (X)</a>
-                </li>
+                </li> */}
                 <li>
-                  <a href="#">LinkedIn</a>
+                  <a href="https://www.linkedin.com/in/riha-mehindi-229611271?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#">Discord</a>
-                </li>
+                </li> */}
                 <li>
-                  <a href="https://www.instagram.com/riha_mehindi/">
+                  <a href="https://www.instagram.com/riha_mehindi/" target="_blank" rel="noopener noreferrer">
                     Instagram
                   </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div className="footer-column">
+            <p className="section-label">• CONTACT</p>
+            <nav className="footer-socials">
+              <ul>
+                <li>
+                  <a href="#">+971 569813990</a>
+                </li>
+                <li>
+                  <a href="#">+91 9188412088</a>
                 </li>
               </ul>
             </nav>
@@ -75,11 +91,12 @@ const Footer = () => {
 
           <form className="newsletter-form">
             <input
+            disabled
               type="email"
               placeholder="Your email address"
               className="newsletter-input"
             />
-            <button type="submit" className="newsletter-button">
+            <button type="submit" className="newsletter-button" disabled>
               SUBMIT <span>•</span>
             </button>
           </form>
@@ -92,19 +109,11 @@ const Footer = () => {
           </p>
         </div> */}
 
-        {/* Large branded text */}
-        <div className="footer-branding">
-          <h2>RIHA MEHINDI</h2>
-        </div>
-
         {/* Footer bottom - Copyright */}
         <div className="footer-bottom">
           <p>©2025 RIHA MEHINDI™ // ALL RIGHTS RESERVED</p>
           <div className="footer-bottom-links">
-            <a href="#">WE RESPECT YOUR PRIVACY</a>
-            {/* <p>
-              WEBSITE BY <a href="#">HNY</a>
-            </p> */}
+            <a href="https://www.instagram.com/decode__dev/" target="_blank" rel="noopener noreferrer" className="footer-bottom-link">Developed by // Decode dev</a>           
           </div>
         </div>
       </div>

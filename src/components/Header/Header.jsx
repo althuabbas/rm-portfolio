@@ -87,11 +87,11 @@ const Header = () => {
           {" "}
           RM.
         </a>
-        <DotsSix
+        {/* <DotsSix
           size={32}
           className="header__menu"
           onClick={handleHamburgerClick}
-        />
+        /> */}
       </div>
 
       <ul ref={menuRef}>

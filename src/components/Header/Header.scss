@@ -10,7 +10,15 @@
   padding-block: 10px;
   z-index: 100000;
   transition: transform 0.3s ease-in-out;
-  background-color: vars.$primary_dark;
+  // background-color: vars.$primary_dark;
+
+  /* From https://css.glass */
+  background: rgba(0, 0, 0, 0.28);
+  
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  
 
   &__hidden {
     transform: translateY(-100%);
@@ -19,7 +27,7 @@
   &__wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   &__logo {

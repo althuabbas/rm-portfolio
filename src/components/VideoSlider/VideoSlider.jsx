@@ -23,12 +23,16 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
   );
   const videoRefs = useRef([]);
   const horizontalSliderRef = useRef(null);
+  // Touch swipe tracking refs
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const sliderContainerRef = useRef(null);
 
   // Check device size
   useEffect(() => {
     const checkDeviceSize = () => {
       setIsMobile(window.innerWidth < 768);
-      setIsDesktop(window.innerWidth >= 1200);
+      setIsDesktop(window.innerWidth >= 768); // Changed from 1200 to include tablets
     };
 
     checkDeviceSize();
@@ -161,19 +165,34 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
     setCurrentIndex((prev) => (prev === videoData.length - 1 ? 0 : prev + 1));
   };
 
-  const handleDotClick = (index, e) => {
-    if (e) e.stopPropagation();
-    setCurrentIndex(index);
-  };
+  // Only used in pagination, uncomment if pagination is enabled
+  // const handleDotClick = (index, e) => {
+  //   if (e) e.stopPropagation();
+  //   setCurrentIndex(index);
+  // };
 
   const togglePlayPause = (e) => {
     if (e) e.stopPropagation();
     setIsPlaying((prev) => !prev);
   };
 
+  // Enhanced for better touch interaction on tablet
   const toggleMute = (e) => {
-    if (e) e.stopPropagation();
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     setIsMuted((prev) => !prev);
+  };
+
+  // Add touch-friendly content interaction
+  const handleItemClick = (index, e) => {
+    if (e) e.stopPropagation();
+    
+    // On tablet touch, set as current
+    if (!isMobile && window.innerWidth < 1200) {
+      setCurrentIndex(index);
+    }
   };
 
   const toggleDescription = (index, e) => {
@@ -234,8 +253,37 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
     return indices;
   };
 
+  // Handle touch events for swiping
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeDiff = touchStartX.current - touchEndX.current;
+    // Minimum swipe distance to register as a swipe (px)
+    const minSwipeDistance = 50;
+    
+    if (Math.abs(swipeDiff) > minSwipeDistance) {
+      if (swipeDiff > 0) {
+        // Swiped left, go next
+        handleNext();
+      } else {
+        // Swiped right, go prev
+        handlePrev();
+      }
+    }
+    
+    // Reset touch values
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+  };
+
   return (
-    <div className="video-slider-container">
+    <div className="video-slider-container" ref={sliderContainerRef}>
       <div>
         <div className="louis-vuitton-subtitle">{subTitle}</div>
         <h2 className="about-title louis-vuitton-title">
@@ -248,7 +296,12 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
       </div>
       {isMobile ? (
         // Mobile view - Instagram-like story slider
-        <div className="mobile-slider">
+        <div 
+          className="mobile-slider"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="progress-container">
             {videoData?.map((_, index) => (
               <div
@@ -288,6 +341,7 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
                     src={video.thumbnail}
                     alt={`Thumbnail for ${video.title}`}
                     className="video-thumbnail"
+                    loading="lazy"
                   />
                   <div className="play-icon">▶</div>
                 </div>
@@ -312,6 +366,7 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
                       <img
                         src={video.profileImage || video.thumbnail}
                         alt="Profile"
+                        loading="lazy"
                       />
                     </div>
                     <h3 className="video-title">{video.title}</h3>
@@ -334,7 +389,7 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
                     )}
                   </div>
                 </div>
-                <button className="mute-btn" onClick={toggleMute}>
+                <button className="mute-btn" onClick={toggleMute} aria-label={isMuted ? "Unmute video" : "Mute video"}>
                   {isMuted ? "🔇" : "🔊"}
                 </button>
               </div>
@@ -353,9 +408,14 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
             </button>
           </div>
         </div>
-      ) : isDesktop ? (
-        // Desktop view - Horizontal slider with 4 videos
-        <div className="horizontal-slider">
+      ) : (
+        // Desktop and Tablet view - Horizontal slider
+        <div 
+          className="horizontal-slider"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div 
             className={`slider-track ${
               videoData && videoData.length > 0 
@@ -379,6 +439,7 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
                   }`}
                   onMouseEnter={() => handleMouseEnter(index)}
                   onMouseLeave={handleMouseLeave}
+                  onClick={(e) => handleItemClick(index, e)}
                 >
                   <div
                     className="thumbnail-container"
@@ -389,6 +450,7 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
                         src={video.thumbnail}
                         alt={`Thumbnail for ${video.title}`}
                         className="video-thumbnail"
+                        loading="lazy"
                       />
                     )}
                     <div className="play-icon">▶</div>
@@ -417,6 +479,7 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
                         <img
                           src={video.profileImage || video.thumbnail}
                           alt="Profile"
+                          loading="lazy"
                         />
                       </div>
                       <h3 className="video-title">{video.title}</h3>
@@ -444,7 +507,11 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
                       )}
                     </div>
                   </div>
-                  <button className="mute-btn" onClick={toggleMute}>
+                  <button 
+                    className="mute-btn" 
+                    onClick={toggleMute}
+                    aria-label={isMuted ? "Unmute video" : "Mute video"}
+                  >
                     {isMuted ? "🔇" : "🔊"}
                   </button>
                 </div>
@@ -487,80 +554,6 @@ const VideoSlider = ({ videoData, subTitle, firstTitle, secondTitle }) => {
                 ))}
               </div>
             </>
-          )}
-        </div>
-      ) : (
-        // Tablet view - Dynamic grid
-        <div className="video-grid">
-          {videoData && videoData.length > 0 ? (
-            videoData.map((video, index) => (
-              <div
-                key={video.id}
-                className="grid-item"
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <div
-                  className="thumbnail-container"
-                  style={{ display: !videoLoaded[index] ? "block" : "none" }}
-                >
-                  <img
-                    src={video.thumbnail}
-                    alt={`Thumbnail for ${video.title}`}
-                    className="video-thumbnail"
-                  />
-                  <div className="play-icon">▶</div>
-                </div>
-                <video
-                  ref={(el) => (videoRefs.current[index] = el)}
-                  src={video.src}
-                  loop
-                  muted={isMuted}
-                  playsInline
-                  onLoadedData={() => handleVideoLoad(index)}
-                  onLoadedMetadata={() => handleLoadedMetadata(index)}
-                  style={{ display: videoLoaded[index] ? "block" : "none" }}
-                  onClick={() => {
-                    if (videoRefs.current[index].paused) {
-                      videoRefs.current[index].play();
-                    } else {
-                      videoRefs.current[index].pause();
-                    }
-                  }}
-                />
-                <div className="video-info">
-                  <div className="video-header">
-                    <div className="profile-image">
-                      <img
-                        src={video.profileImage || video.thumbnail}
-                        alt="Profile"
-                      />
-                    </div>
-                    <h3 className="video-title">{video.title}</h3>
-                  </div>
-                  <div className="description-container">
-                    <p>
-                      {expandedDescriptions[index]
-                        ? video.description
-                        : truncateDescription(video.description)}
-                    </p>
-                    {video.description && video.description.length > 60 && (
-                      <button
-                        className="read-more-btn"
-                        onClick={(e) => toggleDescription(index, e)}
-                      >
-                        {expandedDescriptions[index] ? "Show less" : "Read more"}
-                      </button>
-                    )}
-                  </div>
-                </div>
-                <button className="mute-btn" onClick={toggleMute}>
-                  {isMuted ? "🔇" : "🔊"}
-                </button>
-              </div>
-            ))
-          ) : (
-            <div className="no-videos-message">No videos available</div>
           )}
         </div>
       )}
