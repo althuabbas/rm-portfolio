@@ -507,7 +507,7 @@ const Home = () => {
       </section>
 
       {/* taali video */}
-      <section className="spacing wrapper">
+      <section className="wrapper">
         <VideoSlider videoData={taaliVideoData} subTitle="taali / video" firstTitle="rihamehindi" secondTitle="taali" />
       </section>
 
