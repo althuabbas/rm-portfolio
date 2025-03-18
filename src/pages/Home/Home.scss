@@ -187,7 +187,7 @@
 .section__info {
   color: vars.$gray;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin-block: 1.5rem;
 }
 
@@ -213,6 +213,7 @@
 }
 
 ul {
+  text-transform: uppercase;
   @include bp.breakpoint(large) {
     display: flex;
     gap: 30px;

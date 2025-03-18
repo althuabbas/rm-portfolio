@@ -41,7 +41,7 @@ const CommercialShoot = () => {
       </div>  */}
 
       <div>
-        <div className="louis-vuitton-subtitle">Commercial lookbook styling</div>
+        <div className="louis-vuitton-subtitle">lookbook styling</div>
         <h2 className="about-title louis-vuitton-title">
         Commercial{"  "}   {"  "}
           <strong className="title-highlight">

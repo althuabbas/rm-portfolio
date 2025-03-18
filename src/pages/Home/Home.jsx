@@ -323,7 +323,7 @@ const Home = () => {
 
         <div>
           <div className="louis-vuitton-subtitle">           
-            RM X Kristina Fidelskaya
+            Kristina Fidelskaya
           </div>
             <h2 className="about-title louis-vuitton-title">
             Editorial{"  "}  {"  "}
@@ -465,9 +465,9 @@ const Home = () => {
           </div> */}
 
           <div>
-            <div className="louis-vuitton-subtitle">ipl promo shoot</div>
+            <div className="louis-vuitton-subtitle">editorial shoot</div>
             <h2 className="about-title louis-vuitton-title">
-              Advanced{"  "} X {"  "}
+              Advanced{"  "} {"  "}
               <strong className="title-highlight">
                 Editorial Shoot
                 <span className="title-highlight-span"></span>
@@ -502,12 +502,12 @@ const Home = () => {
       </section>
 
       {/* sunsilk add */}
-      <section className="spacing">
+      <section className="spacing wrapper">
         <VideoSlider videoData={videoData} subTitle="Sunsilk ramadan" firstTitle="rihamehindi" secondTitle="Sunsilk" />
       </section>
 
       {/* taali video */}
-      <section className="spacing">
+      <section className="spacing wrapper">
         <VideoSlider videoData={taaliVideoData} subTitle="taali / video" firstTitle="rihamehindi" secondTitle="taali" />
       </section>
 

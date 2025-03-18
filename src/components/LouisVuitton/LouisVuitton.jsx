@@ -1,7 +1,5 @@
 import "./LouisVuitton.scss";
 import { useEffect, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Import images
 import lv1 from "../../assets/images/LV/lv-1.jpeg";
@@ -19,42 +17,6 @@ import { CaretRight } from "@phosphor-icons/react";
 
 const LouisVuitton = () => {
   const [logos, setLogos] = useState([]);
-
-  useEffect(() => {
-    // Register ScrollTrigger plugin
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Initialize scroll animations for grid items
-    const gridItems = document.querySelectorAll('.grid-item');
-    
-    gridItems.forEach((item, index) => {
-      // Set initial state
-      gsap.set(item, {
-        opacity: 0,
-        y: 50,
-      });
-
-      // Create scroll-triggered animation
-      gsap.to(item, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: item,
-          start: "top bottom-=100",
-          end: "bottom center",
-          toggleActions: "play none none reverse",
-        },
-        delay: index * 0.2, // Stagger the animations
-      });
-    });
-
-    // Cleanup function
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
 
   useEffect(() => {
     // Generate logo elements with a precise arranged pattern
