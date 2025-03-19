@@ -37,6 +37,7 @@ import taaliVideo5 from "../../assets/videos/taali/taali-v-5.mp4";
 import taaliVideo6 from "../../assets/videos/taali/taali-v-6.mp4";
 import taaliVideo7 from "../../assets/videos/taali/taali-v-7.mp4";
 import taaliVideo8 from "../../assets/videos/taali/taali-v-8.mp4";
+import taaliVideo9 from "../../assets/videos/taali/taali-v-9.mp4";
 import IplAd from "../../components/IplAd/IplAd";
 
 // ipl ad
@@ -133,6 +134,12 @@ const Home = () => {
     {
       id: 8,
       src: taaliVideo8,
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCEkjP0gJ2KvcFaAESmU7EO9sTyNaVco8tTfRPntmzv8E1kjRvNTtBjMtWBL9h5edbmM&usqp=CAU",
+    },
+    {
+      id: 9,
+      src: taaliVideo9,
       profileImage:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCEkjP0gJ2KvcFaAESmU7EO9sTyNaVco8tTfRPntmzv8E1kjRvNTtBjMtWBL9h5edbmM&usqp=CAU",
     },
